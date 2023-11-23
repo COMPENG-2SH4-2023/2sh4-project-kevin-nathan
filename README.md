@@ -7,6 +7,6 @@ You must watch the briefing video and read through the manual to engage in the d
 
 Section: L09
 
-MacID: huangk85
+MacID: huangk85, lon12
 
-StudentID: 400448168
+StudentID: 400448168, 400442840
