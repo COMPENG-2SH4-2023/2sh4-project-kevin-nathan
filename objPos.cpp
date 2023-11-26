@@ -39,9 +39,5 @@ bool objPos::isPosEqual(const objPos *refPos) {
 }
 
 char objPos::getSymbolIfPosEqual(const objPos *refPos) {
-  if (isPosEqual(refPos)) {
-    return getSymbol();
-  } else {
-    return 0;
-  }
+  return isPosEqual(refPos) ? getSymbol() : 0;
 }

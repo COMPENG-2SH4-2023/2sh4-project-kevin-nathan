@@ -28,15 +28,15 @@ public:
   GameMechs();
   GameMechs(int boardX, int boardY);
 
-  bool getExitFlagStatus();
+  bool getExitFlagStatus() const ;
   void setExitTrue();
 
-  char getInput();
+  char getInput() const ;
   void setInput(char this_input);
   void clearInput();
 
-  int getBoardSizeX();
-  int getBoardSizeY();
+  int getBoardSizeX() const ;
+  int getBoardSizeY() const ;
 };
 
 #endif

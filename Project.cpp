@@ -1,9 +1,14 @@
+#include "GameMechs.h"
 #include "MacUILib.h"
 #include "objPos.h"
 #include <iostream>
 using namespace std;
 
 #define DELAY_CONST 100000
+#define BOARD_WIDTH 20
+#define BOARD_HEIGHT 10
+
+GameMechs game;
 
 void Initialize();
 void GetInput();
@@ -16,7 +21,7 @@ int main() {
 
   Initialize();
 
-  while (exitFlag == false) {
+  while (!game.getExitFlagStatus()) {
     GetInput();
     RunLogic();
     DrawScreen();
@@ -30,20 +35,17 @@ void Initialize(void) {
   MacUILib_init();
   MacUILib_clearScreen();
 
-  exitFlag = false;
+  GameMechs game(BOARD_WIDTH, BOARD_HEIGHT);
 }
 
 void GetInput(void) {
   if (MacUILib_hasChar()) {
-    //TODO do something
+    game.setInput(MacUILib_getChar());
   }
 
-  // TODO modify later
-  /*
-  if (input >= 'a' && input <= 'z') { // convert to uppercase
-    input -= 32;
+  if (game.getInput() >= 'a' && game.getInput() <= 'z') { // convert to uppercase
+    game.setInput(game.getInput() - 32);
   }
-  */
 }
 
 void RunLogic() {}

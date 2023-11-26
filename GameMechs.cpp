@@ -1,12 +1,12 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
+#include "objPos.h"
 #include <memory>
 
 #define DEFAULT_BOARD_WIDTH 20
 #define DEFAULT_BOARD_HEIGHT 10
 #define BORDER_CHAR '#'
 #define PLAYER_CHAR '@'
-
 
 GameMechs::GameMechs() {
   char input = 0;
@@ -15,6 +15,7 @@ GameMechs::GameMechs() {
   int score = 0;
   int boardSizeX = DEFAULT_BOARD_WIDTH;
   int boardSizeY = DEFAULT_BOARD_HEIGHT;
+  objPos food;
 }
 
 GameMechs::GameMechs(int boardX, int boardY) {
@@ -24,22 +25,17 @@ GameMechs::GameMechs(int boardX, int boardY) {
   int score = 0;
   int boardSizeX = DEFAULT_BOARD_WIDTH;
   int boardSizeY = DEFAULT_BOARD_HEIGHT;
-
 }
 
 // TODO Determine if destructor is needed
 
-bool GameMechs::getExitFlagStatus() { return exitFlag; }
+bool GameMechs::getExitFlagStatus() const { return exitFlag; }
 
-char GameMechs::getInput() {
-  // TODO maybe delete this after discussing with kevin
-  // return MacUILib_hasChar() ? MacUILib_getChar() : 0; 
-  return input;
-}
+char GameMechs::getInput() const { return input; }
 
-int GameMechs::getBoardSizeX() { return boardSizeX; }
+int GameMechs::getBoardSizeX() const { return boardSizeX; }
 
-int GameMechs::getBoardSizeY() { return boardSizeY; }
+int GameMechs::getBoardSizeY() const { return boardSizeY; }
 
 void GameMechs::setExitTrue() { exitFlag = true; }
 
