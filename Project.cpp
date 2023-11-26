@@ -1,74 +1,61 @@
-#include <iostream>
 #include "MacUILib.h"
 #include "objPos.h"
-
-
+#include <iostream>
 using namespace std;
 
 #define DELAY_CONST 100000
 
-bool exitFlag;
+void Initialize();
+void GetInput();
+void RunLogic();
+void DrawScreen();
+void LoopDelay();
+void CleanUp();
 
-void Initialize(void);
-void GetInput(void);
-void RunLogic(void);
-void DrawScreen(void);
-void LoopDelay(void);
-void CleanUp(void);
+int main() {
 
+  Initialize();
 
+  while (exitFlag == false) {
+    GetInput();
+    RunLogic();
+    DrawScreen();
+    LoopDelay();
+  }
 
-int main(void)
-{
-
-    Initialize();
-
-    while(exitFlag == false)  
-    {
-        GetInput();
-        RunLogic();
-        DrawScreen();
-        LoopDelay();
-    }
-
-    CleanUp();
-
+  CleanUp();
 }
 
+void Initialize(void) {
+  MacUILib_init();
+  MacUILib_clearScreen();
 
-void Initialize(void)
-{
-    MacUILib_init();
-    MacUILib_clearScreen();
-
-    exitFlag = false;
+  exitFlag = false;
 }
 
-void GetInput(void)
-{
-   
+void GetInput(void) {
+  if (MacUILib_hasChar()) {
+    //TODO do something
+  }
+
+  // TODO modify later
+  /*
+  if (input >= 'a' && input <= 'z') { // convert to uppercase
+    input -= 32;
+  }
+  */
 }
 
-void RunLogic(void)
-{
-    
+void RunLogic() {}
+
+void DrawScreen() { MacUILib_clearScreen(); }
+
+void LoopDelay() {
+  MacUILib_Delay(DELAY_CONST); // 0.1s delay
 }
 
-void DrawScreen(void)
-{
-    MacUILib_clearScreen();    
+void CleanUp() {
+  MacUILib_clearScreen();
 
-}
-
-void LoopDelay(void)
-{
-    MacUILib_Delay(DELAY_CONST); // 0.1s delay
-}
-
-
-void CleanUp(void)
-{
-    MacUILib_clearScreen();    
-  
-    MacUILib_uninit();
+  MacUILib_uninit();
 }

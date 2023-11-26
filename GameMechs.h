@@ -9,37 +9,34 @@
 
 using namespace std;
 
+class GameMechs {
+  // Construct the remaining declaration from the project manual.
 
-class GameMechs
-{
-    // Construct the remaining declaration from the project manual.
+  // Only some sample members are included here
 
-    // Only some sample members are included here
+  // You will include more data members and member functions to complete your
+  // design.
 
-    // You will include more data members and member functions to complete your design.
+private:
+  char input;
+  bool exitFlag;
 
-    private:
-        char input;
-        bool exitFlag;
-        
-        int boardSizeX;
-        int boardSizeY;
+  int boardSizeX;
+  int boardSizeY;
 
-    public:
-        GameMechs();
-        GameMechs(int boardX, int boardY);
-        
-        bool getExitFlagStatus();
-        void setExitTrue();
+public:
+  GameMechs();
+  GameMechs(int boardX, int boardY);
 
-        char getInput();
-        void setInput(char this_input);
-        void clearInput();
+  bool getExitFlagStatus();
+  void setExitTrue();
 
-        int getBoardSizeX();
-        int getBoardSizeY();
-      
+  char getInput();
+  void setInput(char this_input);
+  void clearInput();
 
+  int getBoardSizeX();
+  int getBoardSizeY();
 };
 
 #endif
