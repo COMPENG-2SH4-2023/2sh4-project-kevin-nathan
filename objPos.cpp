@@ -30,6 +30,10 @@ void objPos::setObjPos(int xPos, int yPos, char sym) {
   symbol = sym;
 }
 
+void objPos::setX(int x){ this->x = x; }
+
+void objPos::setY(int y){ this->y = y; }
+
 void objPos::getObjPos(objPos &returnPos) { returnPos.setObjPos(x, y, symbol); }
 
 char objPos::getSymbol() { return symbol; }
