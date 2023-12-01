@@ -18,6 +18,9 @@ class objPos {
 
     void setX(int x);
     void setY(int y);
+    int getX() const;
+    int getY() const;
+
 
     bool isPosEqual(const objPos *refPos);
 

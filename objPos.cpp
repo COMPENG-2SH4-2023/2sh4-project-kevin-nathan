@@ -34,6 +34,10 @@ void objPos::setX(int x){ this->x = x; }
 
 void objPos::setY(int y){ this->y = y; }
 
+int objPos::getX() const {return this->x;};
+
+int objPos::getY() const {return this->y;};
+
 void objPos::getObjPos(objPos &returnPos) { returnPos.setObjPos(x, y, symbol); }
 
 char objPos::getSymbol() { return symbol; }
