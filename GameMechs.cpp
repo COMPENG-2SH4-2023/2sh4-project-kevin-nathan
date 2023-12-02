@@ -14,8 +14,6 @@
 GameMechs::GameMechs() {
   input = 0;
   exitFlag = false;
-  loseFlag = false;
-  score = 0;
 
   boardSizeX = DEFAULT_BOARD_WIDTH;
   boardSizeY = DEFAULT_BOARD_HEIGHT;
@@ -23,15 +21,18 @@ GameMechs::GameMechs() {
 
   player = new Player();
 
-  displayBuffer[boardSizeY][boardSizeX];
-  char **displayBuffer;
+  drawBuffer = new char *[boardSizeY];
+  for (int i = 0; i < boardSizeY; i++) {
+    drawBuffer[i] = new char[boardSizeX];
+  }
+
+  drawnObjList = new DrawnObj *[6];
+  drawnObjCount = 0;
 }
 
 GameMechs::GameMechs(int boardX, int boardY) {
   input = 0;
   exitFlag = false;
-  loseFlag = false;
-  score = 0;
 
   boardSizeX = boardX;
   boardSizeY = boardY;
@@ -39,10 +40,22 @@ GameMechs::GameMechs(int boardX, int boardY) {
 
   player = new Player();
 
-  displayBuffer[boardSizeY][boardSizeX];
+  drawBuffer = new char *[boardSizeY];
+  for (int i = 0; i < boardSizeY; i++) {
+    drawBuffer[i] = new char[boardSizeX];
+  }
+
+  drawnObjList = new DrawnObj *[6];
+  drawnObjCount = 0;
 }
 
-GameMechs::~GameMechs() { delete player; }
+GameMechs::~GameMechs() {
+  for (int i = 0; i < boardSizeY; i++) {
+    delete[] drawBuffer[i];
+  }
+  delete[] drawBuffer;
+  delete[] drawnObjList;
+}
 
 bool GameMechs::getExitFlagStatus() const { return exitFlag; }
 
@@ -60,15 +73,32 @@ void GameMechs::setInput(char this_input) { input = this_input; }
 
 void GameMechs::clearInput() { input = 0; }
 
-void GameMechs::generateBoard() {
+void GameMechs::draw() const {
+  for (int i = 0; i < drawnObjCount; i++) {
+    drawnObjList[i]->draw(drawBuffer);
+  }
+
+  // draw border
   for (int i = 0; i < boardSizeY; i++) {
     for (int j = 0; j < boardSizeX; j++) {
-      if (i < borderSize || i >= boardSizeY - borderSize || 
-          j < borderSize || j >= boardSizeX - borderSize) {
-        displayBuffer[i][j] = BORDER_CHAR;
+      if (i == 0 || i == boardSizeY - borderSize) {
+        drawBuffer[i][j] = '#';
+      } else if (j == 0 || j == boardSizeX - borderSize) {
+        drawBuffer[i][j] = '#';
       } else {
-        displayBuffer[i][j] = ' ';
+        drawBuffer[i][j] = ' ';
       }
     }
+  }
+}
+
+void GameMechs::flip() const {
+  // flip buffer onto screen
+  MacUILib_clearScreen();
+  for (int i = 0; i < boardSizeY; i++) {
+    for (int j = 0; j < boardSizeX; j++) {
+      MacUILib_printf("%c", drawBuffer[i][j]);
+    }
+    MacUILib_printf("\n");
   }
 }

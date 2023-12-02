@@ -62,17 +62,8 @@ void GetInput() {
 void RunLogic() {}
 
 void DrawScreen() {
-  MacUILib_clearScreen();
-
-  for (int i = 0; i < BOARD_HEIGHT; i++) {
-    for (int j = 0; j < BOARD_WIDTH; j++) {
-      MacUILib_printf("%c", displayBuffer[i][j]);
-    }
-    MacUILib_printf("\n");
-  }
-
-  MacUILib_printf("Press ESC to quit.\n");
-  MacUILib_printf("Border Size: %d\n", game->getBorderSize());
+  game->draw();
+  game->flip();
 }
 
 void LoopDelay() {

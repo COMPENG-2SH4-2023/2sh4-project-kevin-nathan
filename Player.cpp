@@ -12,9 +12,6 @@ Player::~Player() {}
 
 void Player::updatePlayerDir(char input) {
   switch (input) {
-  case '\e':
-    mainGameMechsRef->setExitTrue();
-    break;
   case 'W':
     if (myDir != DOWN) {
       myDir = UP;
