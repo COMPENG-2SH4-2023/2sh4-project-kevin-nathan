@@ -23,20 +23,22 @@ private:
 
   int boardSizeX;
   int boardSizeY;
+  int borderSize;
 
 public:
   GameMechs();
   GameMechs(int boardX, int boardY);
 
-  bool getExitFlagStatus() const ;
+  bool getExitFlagStatus() const;
   void setExitTrue();
 
-  char getInput() const ;
+  char getInput() const;
   void setInput(char this_input);
   void clearInput();
 
-  int getBoardSizeX() const ;
-  int getBoardSizeY() const ;
+  int getBoardSizeX() const;
+  int getBoardSizeY() const;
+  int getBorderSize() const;
 };
 
 #endif

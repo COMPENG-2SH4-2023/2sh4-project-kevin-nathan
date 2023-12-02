@@ -9,8 +9,9 @@ Player::Player(GameMechs *thisGMRef) {
 
 Player::~Player() {}
 
-void Player::getPlayerPos(objPos &returnPos) {
-  playerPosList.getHeadElement(returnPos);
+//TODO fix
+void Player::getPlayerPos(objPosArrayList &returnPos) {
+  returnPos = objPosArrayList(playerPosList);
 }
 
 void Player::updatePlayerDir() {
@@ -74,9 +75,9 @@ void Player::movePlayer(bool deleteTailFlag) {
   x = x % mainGameMechsRef->getBoardSizeX();
   y = y % mainGameMechsRef->getBoardSizeY();
 
-  playerPosList.insertHead(objPos(x, y, symbol));
+  // playerPosList.insertHead(objPos(x, y, symbol));
 
-  if(!deleteTailFlag){
-    playerPosList.removeTail();
-  }
+  // if(!deleteTailFlag){
+  //   playerPosList.removeTail();
+  // }
 }
