@@ -14,9 +14,9 @@ public:
   Player();
   ~Player();
 
-  void getPlayerPos(objPosArrayList &returnPos); // Upgrade this in iteration 3.
   void updatePlayerDir(char input);
   void movePlayer(int boardSizeX, int boardSizeY, bool deleteTailFlag);
+  void draw(char** buffer) override;
 
 private:
   objPos playerPos; // Upgrade this in iteration 3.

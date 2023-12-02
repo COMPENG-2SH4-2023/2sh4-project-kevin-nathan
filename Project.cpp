@@ -1,6 +1,8 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
+#include "Player.h"
 #include "objPos.h"
+#include "objPosArrayList.h"
 #include <iostream>
 using namespace std;
 
@@ -8,7 +10,8 @@ using namespace std;
 #define BOARD_WIDTH 20
 #define BOARD_HEIGHT 10
 
-GameMechs game;
+GameMechs *game;
+char displayBuffer[BOARD_HEIGHT][BOARD_WIDTH];
 
 void Initialize();
 void GetInput();
@@ -21,7 +24,7 @@ int main() {
 
   Initialize();
 
-  while (!game.getExitFlagStatus()) {
+  while (!game->getExitFlagStatus()) {
     GetInput();
     RunLogic();
     DrawScreen();
@@ -31,26 +34,46 @@ int main() {
   CleanUp();
 }
 
-void Initialize(void) {
+void Initialize() {
   MacUILib_init();
   MacUILib_clearScreen();
 
-  GameMechs game(BOARD_WIDTH, BOARD_HEIGHT);
+  game = new GameMechs(BOARD_WIDTH, BOARD_HEIGHT);
+  Player player;
 }
 
-void GetInput(void) {
+void GetInput() {
+  char input = 0;
   if (MacUILib_hasChar()) {
-    game.setInput(MacUILib_getChar());
+    input = MacUILib_getChar();
   }
 
-  if (game.getInput() >= 'a' && game.getInput() <= 'z') { // convert to uppercase
-    game.setInput(game.getInput() - 32);
+  if (input >= 'a' && input <= 'z') { // convert to uppercase
+    input -= 32;
   }
+
+  if(input == '\e'){
+    game->setExitTrue();
+  }
+
+  game->setInput(input);
 }
 
 void RunLogic() {}
 
-void DrawScreen() { MacUILib_clearScreen(); }
+void DrawScreen() {
+  MacUILib_clearScreen();
+
+  for (int i = 0; i < BOARD_HEIGHT; i++) {
+    for (int j = 0; j < BOARD_WIDTH; j++) {
+      MacUILib_printf("%c", displayBuffer[i][j]);
+    }
+    MacUILib_printf("\n");
+  }
+
+  MacUILib_printf("Press ESC to quit.\n");
+  MacUILib_printf("Border Size: %d\n", game->getBorderSize());
+}
 
 void LoopDelay() {
   MacUILib_Delay(DELAY_CONST); // 0.1s delay

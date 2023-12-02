@@ -7,6 +7,8 @@
 #include "objPos.h"
 #include "objPosArrayList.h"
 
+#include "Player.h"
+
 using namespace std;
 
 class GameMechs {
@@ -24,10 +26,18 @@ private:
   int boardSizeX;
   int boardSizeY;
   int borderSize;
+  bool loseFlag;
+  int score;
+
+  Player *player;
+
+  char **displayBuffer;
+
 
 public:
   GameMechs();
   GameMechs(int boardX, int boardY);
+  ~GameMechs();
 
   bool getExitFlagStatus() const;
   void setExitTrue();
@@ -39,6 +49,8 @@ public:
   int getBoardSizeX() const;
   int getBoardSizeY() const;
   int getBorderSize() const;
+
+  void generateBoard();
 };
 
 #endif

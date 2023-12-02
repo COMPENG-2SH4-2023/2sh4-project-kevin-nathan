@@ -1,5 +1,6 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
+#include "Player.h"
 #include "objPos.h"
 #include <memory>
 
@@ -8,34 +9,40 @@
 #define DEFAULT_BORDER_SIZE 1
 #define PLAYER_CHAR '@'
 #define FIELD_CHAR ' '
+#define BORDER_CHAR '#'
 
 GameMechs::GameMechs() {
-  char input = 0;
-  bool exitFlag = false;
-  bool loseFlag = false;
-  int score = 0;
+  input = 0;
+  exitFlag = false;
+  loseFlag = false;
+  score = 0;
 
-  int boardSizeX = DEFAULT_BOARD_WIDTH;
-  int boardSizeY = DEFAULT_BOARD_HEIGHT; 
-  int borderSize = DEFAULT_BORDER_SIZE;
+  boardSizeX = DEFAULT_BOARD_WIDTH;
+  boardSizeY = DEFAULT_BOARD_HEIGHT;
+  borderSize = DEFAULT_BORDER_SIZE;
 
-  objPos food;
+  player = new Player();
+
+  displayBuffer[boardSizeY][boardSizeX];
+  char **displayBuffer;
 }
 
 GameMechs::GameMechs(int boardX, int boardY) {
-  char input = 0;
-  bool exitFlag = false;
-  bool loseFlag = false;
-  int score = 0;
+  input = 0;
+  exitFlag = false;
+  loseFlag = false;
+  score = 0;
 
-  int boardSizeX = boardX;
-  int boardSizeY = boardY;
-  int borderSize = DEFAULT_BORDER_SIZE;
+  boardSizeX = boardX;
+  boardSizeY = boardY;
+  borderSize = DEFAULT_BORDER_SIZE;
 
-  objPos food;
+  player = new Player();
 
-// TODO Add destructor for heap variables
+  displayBuffer[boardSizeY][boardSizeX];
 }
+
+GameMechs::~GameMechs() { delete player; }
 
 bool GameMechs::getExitFlagStatus() const { return exitFlag; }
 
@@ -52,3 +59,16 @@ void GameMechs::setExitTrue() { exitFlag = true; }
 void GameMechs::setInput(char this_input) { input = this_input; }
 
 void GameMechs::clearInput() { input = 0; }
+
+void GameMechs::generateBoard() {
+  for (int i = 0; i < boardSizeY; i++) {
+    for (int j = 0; j < boardSizeX; j++) {
+      if (i < borderSize || i >= boardSizeY - borderSize || 
+          j < borderSize || j >= boardSizeX - borderSize) {
+        displayBuffer[i][j] = BORDER_CHAR;
+      } else {
+        displayBuffer[i][j] = ' ';
+      }
+    }
+  }
+}
