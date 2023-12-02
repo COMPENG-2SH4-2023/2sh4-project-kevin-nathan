@@ -8,8 +8,8 @@
 #include "DrawnObjArray.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
-
 #include "Player.h"
+#include "Food.h"
 
 using namespace std;
 
@@ -34,6 +34,8 @@ private:
   GameState gameState;
 
   Player *player;
+  
+  Food food;
 
   char **drawBuffer;
   DrawnObjArray *drawnObjArray;
@@ -55,6 +57,7 @@ public:
   int getBorderSize() const;
 
   void update();
+  void generateFood();
 
   void setRunningTrue();
   void setLoseTrue();

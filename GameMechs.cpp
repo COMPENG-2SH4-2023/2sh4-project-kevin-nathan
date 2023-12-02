@@ -4,9 +4,12 @@
 #include "objPos.h"
 #include <memory>
 
+#include "Food.h"
+
 #define DEFAULT_BOARD_WIDTH 20
 #define DEFAULT_BOARD_HEIGHT 10
 #define DEFAULT_BORDER_SIZE 1
+#define MAX_FOOD 5
 #define PLAYER_CHAR '@'
 #define FIELD_CHAR ' '
 #define BORDER_CHAR '#'
@@ -116,4 +119,8 @@ void GameMechs::flip() const {
   for (int i = 0; i < boardSizeY; i++) {
     MacUILib_printf("%s\n", drawBuffer[i]);
   }
+}
+
+void GameMechs::generateFood(){
+  
 }

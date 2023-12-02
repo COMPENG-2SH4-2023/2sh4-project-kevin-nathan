@@ -45,6 +45,8 @@ void Initialize() {
   MacUILib_init();
   MacUILib_clearScreen();
 
+  srand(time(NULL));
+
   game = new GameMechs(BOARD_WIDTH, BOARD_HEIGHT);
   Player player;
 }
