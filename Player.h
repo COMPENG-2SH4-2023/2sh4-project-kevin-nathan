@@ -4,7 +4,9 @@
 #include "objPos.h"
 #include "objPosArrayList.h"
 
-class Player {
+#include "DrawnObj.h"
+
+class Player : DrawnObj {
   // Construct the remaining declaration from the project manual.
 public:
   enum Dir { UP, DOWN, LEFT, RIGHT, STOP }; // This is the direction state
