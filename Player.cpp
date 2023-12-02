@@ -43,7 +43,7 @@ void Player::updatePlayerDir(char input) {
 }
 
 void Player::movePlayer(int boardSizeX, int boardSizeY,
-                        bool deleteTailFlag = true) {
+                        bool deleteTail = true) {
   objPos snakeHead;
   playerPosList->getHeadElement(snakeHead);
 
@@ -75,7 +75,7 @@ void Player::movePlayer(int boardSizeX, int boardSizeY,
 
   playerPosList->insertHead(objPos(x, y, symbol));
 
-  if (deleteTailFlag) {
+  if (deleteTail) {
     playerPosList->removeTail();
   }
 }
@@ -103,7 +103,7 @@ bool Player::checkSelfCollision(){
 
 bool Player::checkCollision(int x, int y){
   objPos segment;
-  for(int i = 1; i < playerPosList->getSize(); i++){
+  for(int i = 0; i < playerPosList->getSize(); i++){
     playerPosList->getElement(segment, i);
     if(segment.getX() == x && segment.getY() == y){
       return true;

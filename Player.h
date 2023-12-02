@@ -14,12 +14,14 @@ public:
   ~Player();
 
   void updatePlayerDir(char input);
-  void movePlayer(int boardSizeX, int boardSizeY, bool deleteTailFlag);
+  void movePlayer(int boardSizeX, int boardSizeY, bool deleteTail);
   void draw(char** buffer) override;
 
   bool checkSelfCollision();
   bool checkCollision(int x, int y);
 
+  int getNextX() const;
+  int getNextY() const;
 private:
   objPos playerPos; // Upgrade this in iteration 3.
   enum Dir myDir;

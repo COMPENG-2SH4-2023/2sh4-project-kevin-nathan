@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-#define DELAY_CONST 100000
+#define DELAY_CONST 1000000
 #define BOARD_WIDTH 20
 #define BOARD_HEIGHT 10
 

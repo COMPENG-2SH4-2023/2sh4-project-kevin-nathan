@@ -95,15 +95,18 @@ void GameMechs::setInput(char this_input) { input = this_input; }
 void GameMechs::clearInput() { input = 0; }
 
 void GameMechs::update() {
+  //Update player
   player->updatePlayerDir(input);
-  player->movePlayer(boardSizeX, boardSizeY, true);
   if (player->checkSelfCollision()) {
     gameState = LOSE;
   }
 
   //only generate new food if one is eaten
   if(player->checkCollision(food->getX(), food->getY())){
+    player->movePlayer(boardSizeX, boardSizeY, false);
     generateFood();
+  }else {
+    player->movePlayer(boardSizeX, boardSizeY, true);
   }
 }
 
