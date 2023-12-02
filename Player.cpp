@@ -87,3 +87,16 @@ void Player::draw(char **buffer) {
     buffer[returnPos.getY()][returnPos.getX()] = i == 0 ? '0' : 'o';
   }
 }
+
+bool Player::checkSelfCollision(){
+  objPos head;
+  playerPosList->getElement(head, 0);
+  for(int i = 1; i < playerPosList->getSize(); i++){
+    objPos tail;
+    playerPosList->getElement(tail, i);
+    if(head.getX() == tail.getX() && head.getY() == tail.getY()){
+      return true;
+    }
+  }
+  return false;
+}

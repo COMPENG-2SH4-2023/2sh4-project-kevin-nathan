@@ -54,7 +54,7 @@ public:
   int getBoardSizeY() const;
   int getBorderSize() const;
 
-  void update() const;
+  void update();
 
   void setRunningTrue();
   void setLoseTrue();

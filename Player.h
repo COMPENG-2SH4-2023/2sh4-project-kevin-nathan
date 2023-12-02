@@ -17,6 +17,8 @@ public:
   void movePlayer(int boardSizeX, int boardSizeY, bool deleteTailFlag);
   void draw(char** buffer) override;
 
+  bool checkSelfCollision();
+
 private:
   objPos playerPos; // Upgrade this in iteration 3.
   enum Dir myDir;

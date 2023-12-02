@@ -83,9 +83,12 @@ void GameMechs::setInput(char this_input) { input = this_input; }
 
 void GameMechs::clearInput() { input = 0; }
 
-void GameMechs::update() const {
+void GameMechs::update(){
   player->updatePlayerDir(input);
   player->movePlayer(boardSizeX, boardSizeY, true);
+  if(player->checkSelfCollision()){
+    gameState = LOSE;
+  }
 }
 
 void GameMechs::draw() const {
