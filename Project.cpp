@@ -48,7 +48,8 @@ void GetInput() {
     input = MacUILib_getChar();
   }
 
-  if (input >= 'a' && input <= 'z') { // convert to uppercase
+  // convert to uppercase
+  if (input >= 'a' && input <= 'z') { 
     input -= 32;
   }
 
