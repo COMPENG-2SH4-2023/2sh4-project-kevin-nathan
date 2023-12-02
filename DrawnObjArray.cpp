@@ -1,44 +1,44 @@
 #include "DrawnObjArray.h"
 
 DrawnObjArray::DrawnObjArray() {
-  m_nSize = 0;
-  m_nCapacity = 1;
-  m_ppDrawnObj = new DrawnObj*[m_nCapacity];
+  size = 0;
+  capacity = 1;
+  drawnObj = new DrawnObj*[capacity];
 }
 
 DrawnObjArray::~DrawnObjArray() {
-  delete[] m_ppDrawnObj;
+  delete[] drawnObj;
 }
 
 int DrawnObjArray::getSize() const {
-  return m_nSize;
+  return size;
 }
 
 int DrawnObjArray::getCapacity() const {
-  return m_nCapacity;
+  return capacity;
 }
 
 DrawnObj* DrawnObjArray::get(int nIndex) const {
-  return m_ppDrawnObj[nIndex];
+  return drawnObj[nIndex];
 }
 
 void DrawnObjArray::add(DrawnObj* pDrawnObj) {
-  if (m_nSize == m_nCapacity) {
-    m_nCapacity *= 2;
-    DrawnObj** ppTemp = new DrawnObj*[m_nCapacity];
-    for (int i = 0; i < m_nSize; i++) {
-      ppTemp[i] = m_ppDrawnObj[i];
+  if (size == capacity) {
+    capacity *= 2;
+    DrawnObj** ppTemp = new DrawnObj*[capacity];
+    for (int i = 0; i < size; i++) {
+      ppTemp[i] = drawnObj[i];
     }
-    delete[] m_ppDrawnObj;
-    m_ppDrawnObj = ppTemp;
+    delete[] drawnObj;
+    drawnObj = ppTemp;
   }
-  m_ppDrawnObj[m_nSize] = pDrawnObj;
-  m_nSize++;
+  drawnObj[size] = pDrawnObj;
+  size++;
 }
 
 void DrawnObjArray::remove(int nIndex) {
-  for (int i = nIndex; i < m_nSize - 1; i++) {
-    m_ppDrawnObj[i] = m_ppDrawnObj[i + 1];
+  for (int i = nIndex; i < size - 1; i++) {
+    drawnObj[i] = drawnObj[i + 1];
   }
-  m_nSize--;
+  size--;
 }

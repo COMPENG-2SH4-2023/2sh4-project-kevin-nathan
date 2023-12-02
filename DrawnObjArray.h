@@ -4,9 +4,9 @@
 class DrawnObjArray
 {
 private:
-  DrawnObj** m_ppDrawnObj;
-  int m_nSize;
-  int m_nCapacity;
+  DrawnObj** drawnObj;
+  int size;
+  int capacity;
 
 public:
   DrawnObjArray();

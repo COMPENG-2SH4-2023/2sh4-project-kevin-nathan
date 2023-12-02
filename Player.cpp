@@ -5,11 +5,13 @@
 
 Player::Player() {
   myDir = STOP;
-  objPosArrayList playerPosList;
-  playerPosList.insertHead(objPos(5, 5, '@'));
+  playerPosList = new objPosArrayList();
+  playerPosList->insertHead(objPos(5, 5, '@'));
 }
 
-Player::~Player() {}
+Player::~Player() {
+  delete playerPosList;
+}
 
 void Player::updatePlayerDir(char input) {
   switch (input) {
@@ -41,7 +43,7 @@ void Player::updatePlayerDir(char input) {
 void Player::movePlayer(int boardSizeX, int boardSizeY,
                         bool deleteTailFlag = true) {
   objPos snakeHead;
-  playerPosList.getHeadElement(snakeHead);
+  playerPosList->getHeadElement(snakeHead);
 
   int x = snakeHead.getX();
   int y = snakeHead.getY();
@@ -69,17 +71,17 @@ void Player::movePlayer(int boardSizeX, int boardSizeY,
   x = x % boardSizeX;
   y = y % boardSizeY;
 
-  playerPosList.insertHead(objPos(x, y, symbol));
+  playerPosList->insertHead(objPos(x, y, symbol));
 
   if (!deleteTailFlag) {
-    playerPosList.removeTail();
+    playerPosList->removeTail();
   }
 }
 
 void Player::draw(char **buffer) {
-  for (int i = 0; i < playerPosList.getSize(); i++) {
+  for (int i = 0; i < playerPosList->getSize(); i++) {
     objPos returnPos;
-    playerPosList.getElement(returnPos, i);
+    playerPosList->getElement(returnPos, i);
     buffer[returnPos.getY()][returnPos.getX()] = returnPos.getSymbol();
   }
 }

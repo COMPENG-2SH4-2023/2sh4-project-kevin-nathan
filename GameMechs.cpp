@@ -27,6 +27,7 @@ GameMechs::GameMechs() {
   }
 
   drawnObjArray = new DrawnObjArray();
+  drawnObjArray->add(player);
 }
 
 GameMechs::GameMechs(int boardX, int boardY) {
@@ -73,21 +74,21 @@ void GameMechs::setInput(char this_input) { input = this_input; }
 void GameMechs::clearInput() { input = 0; }
 
 void GameMechs::draw() const {
-  for (int i = 0; i < drawnObjArray->getSize(); i++) {
-    drawnObjArray->get(i)->draw(drawBuffer);
-  }
-
   // draw border
   for (int i = 0; i < boardSizeY; i++) {
     for (int j = 0; j < boardSizeX; j++) {
       if (i == 0 || i == boardSizeY - borderSize) {
-        drawBuffer[i][j] = '#';
+        drawBuffer[i][j] = BORDER_CHAR;
       } else if (j == 0 || j == boardSizeX - borderSize) {
-        drawBuffer[i][j] = '#';
+        drawBuffer[i][j] = BORDER_CHAR;
       } else {
-        drawBuffer[i][j] = ' ';
+        drawBuffer[i][j] = FIELD_CHAR;
       }
     }
+  }
+
+  for (int i = 0; i < drawnObjArray->getSize(); i++) {
+    drawnObjArray->get(i)->draw(drawBuffer);
   }
 }
 
