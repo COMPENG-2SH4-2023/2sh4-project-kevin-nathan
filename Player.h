@@ -18,6 +18,7 @@ public:
   void draw(char** buffer) override;
 
   bool checkSelfCollision();
+  bool checkCollision(int x, int y);
 
 private:
   objPos playerPos; // Upgrade this in iteration 3.

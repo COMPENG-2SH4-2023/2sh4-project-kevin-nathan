@@ -90,16 +90,22 @@ void CleanUp() {
 
 void loseScreen(){
   MacUILib_printf("YOU LOSE!\n");
-  MacUILib_printf("Press any key to exit");
-  while(!MacUILib_hasChar()){
+  MacUILib_printf("Press ESC to exit");
+  while(true){
+    if(MacUILib_hasChar() && MacUILib_getChar() == '\e'){
+      break;
+    }
     MacUILib_Delay(10);
   }
 }
 
 void winScreen(){
   MacUILib_printf("YOU WIN!\n");
-  MacUILib_printf("Press any key to exit");
-  while(!MacUILib_hasChar()){
+  MacUILib_printf("Press ESC to exit");
+  while(true){
+    if(MacUILib_hasChar() && MacUILib_getChar() == '\e'){
+      break;
+    }
     MacUILib_Delay(10);
   }
 }

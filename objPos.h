@@ -16,8 +16,8 @@ class objPos {
     void getObjPos(objPos &returnPos);
     char getSymbol();
 
-    void setX(int x);
-    void setY(int y);
+    void setX(int xPos);
+    void setY(int yPos);
     int getX() const;
     int getY() const;
 

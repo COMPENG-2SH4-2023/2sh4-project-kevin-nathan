@@ -24,6 +24,7 @@ GameMechs::GameMechs() {
   gameState = RUNNING;
 
   player = new Player();
+  food = new Food();
 
   drawBuffer = new char *[boardSizeY];
   for (int i = 0; i < boardSizeY; i++) {
@@ -33,6 +34,9 @@ GameMechs::GameMechs() {
 
   drawnObjArray = new DrawnObjArray();
   drawnObjArray->add(player);
+  drawnObjArray->add(food);
+
+  generateFood();
 }
 
 GameMechs::GameMechs(int boardX, int boardY) {
@@ -45,6 +49,7 @@ GameMechs::GameMechs(int boardX, int boardY) {
   gameState = RUNNING;
 
   player = new Player();
+  food = new Food();
 
   drawBuffer = new char *[boardSizeY];
   for (int i = 0; i < boardSizeY; i++) {
@@ -54,6 +59,9 @@ GameMechs::GameMechs(int boardX, int boardY) {
 
   drawnObjArray = new DrawnObjArray();
   drawnObjArray->add(player);
+  drawnObjArray->add(food);
+
+  generateFood();
 }
 
 GameMechs::~GameMechs() {
@@ -86,11 +94,16 @@ void GameMechs::setInput(char this_input) { input = this_input; }
 
 void GameMechs::clearInput() { input = 0; }
 
-void GameMechs::update(){
+void GameMechs::update() {
   player->updatePlayerDir(input);
   player->movePlayer(boardSizeX, boardSizeY, true);
-  if(player->checkSelfCollision()){
+  if (player->checkSelfCollision()) {
     gameState = LOSE;
+  }
+
+  //only generate new food if one is eaten
+  if(player->checkCollision(food->getX(), food->getY())){
+    generateFood();
   }
 }
 
@@ -121,6 +134,14 @@ void GameMechs::flip() const {
   }
 }
 
-void GameMechs::generateFood(){
-  
+void GameMechs::generateFood() {
+  int x, y;
+
+  //randomly generate food until it does not generate on a player
+  do {
+    x = rand() % (boardSizeX-2*borderSize) + borderSize;
+    y = rand() % (boardSizeY-2*borderSize) + borderSize;
+  } while (player->checkCollision(x, y));
+
+  food->setXY(x, y);
 }

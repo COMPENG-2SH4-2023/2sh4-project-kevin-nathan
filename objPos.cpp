@@ -30,9 +30,9 @@ void objPos::setObjPos(int xPos, int yPos, char sym) {
   symbol = sym;
 }
 
-void objPos::setX(int x){ this->x = x; }
+void objPos::setX(int xPos){ x = xPos; }
 
-void objPos::setY(int y){ this->y = y; }
+void objPos::setY(int yPos){ y = yPos; }
 
 int objPos::getX() const {return this->x;};
 
@@ -46,6 +46,7 @@ bool objPos::isPosEqual(const objPos *refPos) {
   return (refPos->x == x && refPos->y == y);
 }
 
+//TODO delete if unnecessary, also delete from .h file
 char objPos::getSymbolIfPosEqual(const objPos *refPos) {
   return isPosEqual(refPos) ? getSymbol() : 0;
 }

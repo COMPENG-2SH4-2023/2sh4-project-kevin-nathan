@@ -100,3 +100,14 @@ bool Player::checkSelfCollision(){
   }
   return false;
 }
+
+bool Player::checkCollision(int x, int y){
+  objPos segment;
+  for(int i = 1; i < playerPosList->getSize(); i++){
+    playerPosList->getElement(segment, i);
+    if(segment.getX() == x && segment.getY() == y){
+      return true;
+    }
+  }
+  return false;
+}

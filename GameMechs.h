@@ -35,7 +35,7 @@ private:
 
   Player *player;
   
-  Food food;
+  Food *food;
 
   char **drawBuffer;
   DrawnObjArray *drawnObjArray;
