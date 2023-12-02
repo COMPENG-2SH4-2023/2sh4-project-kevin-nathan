@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-#define DELAY_CONST 1000000
+#define DELAY_CONST 600000
 #define BOARD_WIDTH 20
 #define BOARD_HEIGHT 10
 
@@ -76,6 +76,7 @@ void RunLogic() {
 void DrawScreen() {
   game->draw();
   game->flip();
+  MacUILib_printf("Length: %d");
 }
 
 void LoopDelay() {

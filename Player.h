@@ -11,6 +11,7 @@ public:
   enum Dir { UP, DOWN, LEFT, RIGHT, STOP }; // This is the direction state
 
   Player();
+  Player(int x, int y);
   ~Player();
 
   void updatePlayerDir(char input);
@@ -22,6 +23,7 @@ public:
 
   int getNextX() const;
   int getNextY() const;
+  int getLength() const;
 private:
   objPos playerPos; // Upgrade this in iteration 3.
   enum Dir myDir;

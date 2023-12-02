@@ -33,8 +33,8 @@ GameMechs::GameMechs() {
   }
 
   drawnObjArray = new DrawnObjArray();
-  drawnObjArray->add(player);
   drawnObjArray->add(food);
+  drawnObjArray->add(player);
 
   generateFood();
 }
@@ -58,8 +58,8 @@ GameMechs::GameMechs(int boardX, int boardY) {
   }
 
   drawnObjArray = new DrawnObjArray();
-  drawnObjArray->add(player);
   drawnObjArray->add(food);
+  drawnObjArray->add(player);
 
   generateFood();
 }
@@ -97,9 +97,6 @@ void GameMechs::clearInput() { input = 0; }
 void GameMechs::update() {
   //Update player
   player->updatePlayerDir(input);
-  if (player->checkSelfCollision()) {
-    gameState = LOSE;
-  }
 
   //only generate new food if one is eaten
   if(player->checkCollision(food->getX(), food->getY())){
@@ -107,6 +104,10 @@ void GameMechs::update() {
     generateFood();
   }else {
     player->movePlayer(boardSizeX, boardSizeY, true);
+  }
+
+  if (player->checkSelfCollision()) {
+    gameState = LOSE;
   }
 }
 

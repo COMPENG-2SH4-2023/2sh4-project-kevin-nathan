@@ -6,14 +6,18 @@
 Player::Player() {
   myDir = STOP;
   playerPosList = new objPosArrayList();
-  for (int i = 0; i < 5; i++) {
-    playerPosList->insertHead(objPos(5, 1 + i, '@'));
-  }
+
+  playerPosList->insertHead(objPos(5, 1, '@'));
 }
 
-Player::~Player() {
-  delete playerPosList;
+Player::Player(int x, int y) {
+  myDir = STOP;
+  playerPosList = new objPosArrayList();
+
+  playerPosList->insertHead(objPos(x, y, '@'));
 }
+
+Player::~Player() { delete playerPosList; }
 
 void Player::updatePlayerDir(char input) {
   switch (input) {
@@ -88,26 +92,30 @@ void Player::draw(char **buffer) {
   }
 }
 
-bool Player::checkSelfCollision(){
+bool Player::checkSelfCollision() {
   objPos head;
   playerPosList->getElement(head, 0);
-  for(int i = 1; i < playerPosList->getSize(); i++){
+  for (int i = 1; i < playerPosList->getSize(); i++) {
     objPos tail;
     playerPosList->getElement(tail, i);
-    if(head.getX() == tail.getX() && head.getY() == tail.getY()){
+    if (head.getX() == tail.getX() && head.getY() == tail.getY()) {
       return true;
     }
   }
   return false;
 }
 
-bool Player::checkCollision(int x, int y){
+bool Player::checkCollision(int x, int y) {
   objPos segment;
-  for(int i = 0; i < playerPosList->getSize(); i++){
+  for (int i = 0; i < playerPosList->getSize(); i++) {
     playerPosList->getElement(segment, i);
-    if(segment.getX() == x && segment.getY() == y){
+    if (segment.getX() == x && segment.getY() == y) {
       return true;
     }
   }
   return false;
+}
+
+int Player::getLength()const{
+  return playerPosList->getSize();
 }
