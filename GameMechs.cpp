@@ -23,7 +23,8 @@ GameMechs::GameMechs() {
 
   drawBuffer = new char *[boardSizeY];
   for (int i = 0; i < boardSizeY; i++) {
-    drawBuffer[i] = new char[boardSizeX];
+    drawBuffer[i] = new char[boardSizeX + 1];
+    drawBuffer[i][boardSizeX] = '\0';
   }
 
   drawnObjArray = new DrawnObjArray();
@@ -42,7 +43,8 @@ GameMechs::GameMechs(int boardX, int boardY) {
 
   drawBuffer = new char *[boardSizeY];
   for (int i = 0; i < boardSizeY; i++) {
-    drawBuffer[i] = new char[boardSizeX];
+    drawBuffer[i] = new char[boardSizeX + 1];
+    drawBuffer[i][boardSizeX] = '\0';
   }
 
   drawnObjArray = new DrawnObjArray();
@@ -101,9 +103,6 @@ void GameMechs::flip() const {
   // flip buffer onto screen
   MacUILib_clearScreen();
   for (int i = 0; i < boardSizeY; i++) {
-    for (int j = 0; j < boardSizeX; j++) {
-      MacUILib_printf("%c", drawBuffer[i][j]);
-    }
-    MacUILib_printf("\n");
+    MacUILib_printf("%s\n", drawBuffer[i]);
   }
 }

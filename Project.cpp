@@ -11,7 +11,6 @@ using namespace std;
 #define BOARD_HEIGHT 10
 
 GameMechs *game;
-char displayBuffer[BOARD_HEIGHT][BOARD_WIDTH];
 
 void Initialize();
 void GetInput();

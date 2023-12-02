@@ -6,7 +6,9 @@
 Player::Player() {
   myDir = STOP;
   playerPosList = new objPosArrayList();
-  playerPosList->insertHead(objPos(5, 5, '@'));
+  for (int i = 0; i < 5; i++) {
+    playerPosList->insertHead(objPos(5, 1 + i, '@'));
+  }
 }
 
 Player::~Player() {
@@ -51,10 +53,10 @@ void Player::movePlayer(int boardSizeX, int boardSizeY,
 
   switch (myDir) {
   case UP:
-    y += 1;
+    y -= 1;
     break;
   case DOWN:
-    y -= 1;
+    y += 1;
     break;
   case LEFT:
     x -= 1;
@@ -82,6 +84,6 @@ void Player::draw(char **buffer) {
   for (int i = 0; i < playerPosList->getSize(); i++) {
     objPos returnPos;
     playerPosList->getElement(returnPos, i);
-    buffer[returnPos.getY()][returnPos.getX()] = returnPos.getSymbol();
+    buffer[returnPos.getY()][returnPos.getX()] = i == 0 ? '0' : 'o';
   }
 }
