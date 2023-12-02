@@ -21,13 +21,17 @@ class GameMechs {
   // You will include more data members and member functions to complete your
   // design.
 
+public:
+  enum GameState {RUNNING, WIN, LOSE, EXIT};
+
 private:
   char input;
-  bool exitFlag;
 
   int boardSizeX;
   int boardSizeY;
   int borderSize;
+
+  GameState gameState;
 
   Player *player;
 
@@ -39,7 +43,7 @@ public:
   GameMechs(int boardX, int boardY);
   ~GameMechs();
 
-  bool getExitFlagStatus() const;
+  GameState getGameState() const;
   void setExitTrue();
 
   char getInput() const;
@@ -51,6 +55,10 @@ public:
   int getBorderSize() const;
 
   void update() const;
+
+  void setRunningTrue();
+  void setLoseTrue();
+  void setWinTrue();
 
   void draw() const;
   void flip() const;

@@ -13,11 +13,12 @@
 
 GameMechs::GameMechs() {
   input = 0;
-  exitFlag = false;
 
   boardSizeX = DEFAULT_BOARD_WIDTH;
   boardSizeY = DEFAULT_BOARD_HEIGHT;
   borderSize = DEFAULT_BORDER_SIZE;
+
+  gameState = RUNNING;
 
   player = new Player();
 
@@ -33,11 +34,12 @@ GameMechs::GameMechs() {
 
 GameMechs::GameMechs(int boardX, int boardY) {
   input = 0;
-  exitFlag = false;
 
   boardSizeX = boardX;
   boardSizeY = boardY;
   borderSize = DEFAULT_BORDER_SIZE;
+
+  gameState = RUNNING;
 
   player = new Player();
 
@@ -59,7 +61,7 @@ GameMechs::~GameMechs() {
   delete drawnObjArray;
 }
 
-bool GameMechs::getExitFlagStatus() const { return exitFlag; }
+GameMechs::GameState GameMechs::getGameState() const { return gameState; }
 
 char GameMechs::getInput() const { return input; }
 
@@ -69,7 +71,13 @@ int GameMechs::getBoardSizeY() const { return boardSizeY; }
 
 int GameMechs::getBorderSize() const { return borderSize; }
 
-void GameMechs::setExitTrue() { exitFlag = true; }
+void GameMechs::setExitTrue() { gameState = EXIT; }
+
+void GameMechs::setRunningTrue() { gameState = RUNNING; }
+
+void GameMechs::setLoseTrue() { gameState = LOSE; }
+
+void GameMechs::setWinTrue() { gameState = WIN; }
 
 void GameMechs::setInput(char this_input) { input = this_input; }
 
