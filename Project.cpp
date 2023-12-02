@@ -18,16 +18,24 @@ void RunLogic();
 void DrawScreen();
 void LoopDelay();
 void CleanUp();
+void loseScreen();
+void winScreen();
 
 int main() {
 
   Initialize();
 
-  while (!game->getExitFlagStatus()) {
+  while (game->getGameState() != GameMechs::RUNNING) {
     GetInput();
     RunLogic();
     DrawScreen();
     LoopDelay();
+  }
+
+  if(game->getGameState() == GameMechs::LOSE){
+    loseScreen();
+  }else if(game->getGameState() == GameMechs::WIN){
+    winScreen();
   }
 
   CleanUp();
@@ -76,4 +84,20 @@ void CleanUp() {
   MacUILib_clearScreen();
 
   MacUILib_uninit();
+}
+
+void loseScreen(){
+  MacUILib_printf("YOU LOSE!\n");
+  MacUILib_printf("Press any key to exit");
+  while(!MacUILib_hasChar()){
+    MacUILib_Delay(10);
+  }
+}
+
+void winScreen(){
+  MacUILib_printf("YOU WIN!\n");
+  MacUILib_printf("Press any key to exit");
+  while(!MacUILib_hasChar()){
+    MacUILib_Delay(10);
+  }
 }
