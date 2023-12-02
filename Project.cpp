@@ -60,7 +60,9 @@ void GetInput() {
   game->setInput(input);
 }
 
-void RunLogic() {}
+void RunLogic() {
+  game->update();
+}
 
 void DrawScreen() {
   game->draw();

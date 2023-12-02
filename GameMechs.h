@@ -50,6 +50,8 @@ public:
   int getBoardSizeY() const;
   int getBorderSize() const;
 
+  void update() const;
+
   void draw() const;
   void flip() const;
 };

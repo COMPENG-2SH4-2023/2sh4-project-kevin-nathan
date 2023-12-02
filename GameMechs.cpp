@@ -73,6 +73,11 @@ void GameMechs::setInput(char this_input) { input = this_input; }
 
 void GameMechs::clearInput() { input = 0; }
 
+void GameMechs::update() const {
+  player->updatePlayerDir(input);
+  player->movePlayer(boardSizeX, boardSizeY, true);
+}
+
 void GameMechs::draw() const {
   // draw border
   for (int i = 0; i < boardSizeY; i++) {

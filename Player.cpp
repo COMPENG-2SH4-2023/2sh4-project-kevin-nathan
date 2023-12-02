@@ -68,12 +68,12 @@ void Player::movePlayer(int boardSizeX, int boardSizeY,
     break;
   }
 
-  x = x % boardSizeX;
-  y = y % boardSizeY;
+  x = (x - 1 + (boardSizeX - 2)) % (boardSizeX - 2) + 1;
+  y = (y - 1 + (boardSizeY - 2)) % (boardSizeY - 2) + 1;
 
   playerPosList->insertHead(objPos(x, y, symbol));
 
-  if (!deleteTailFlag) {
+  if (deleteTailFlag) {
     playerPosList->removeTail();
   }
 }
