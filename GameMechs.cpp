@@ -16,10 +16,16 @@ GameMechs::GameMechs() {
   int score = 0;
 
   int boardSizeX = DEFAULT_BOARD_WIDTH;
-  int boardSizeY = DEFAULT_BOARD_HEIGHT; 
+  int boardSizeY = DEFAULT_BOARD_HEIGHT;
   int borderSize = DEFAULT_BORDER_SIZE;
 
-  objPos food;
+  drawBuffer = new char*[boardSizeY];
+  for (int i = 0; i < boardSizeY; i++) {
+    drawBuffer[i] = new char[boardSizeX];
+  }
+
+  drawnObjList = new DrawnObj*[6];
+  drawnObjCount = 0;
 }
 
 GameMechs::GameMechs(int boardX, int boardY) {
@@ -32,9 +38,21 @@ GameMechs::GameMechs(int boardX, int boardY) {
   int boardSizeY = boardY;
   int borderSize = DEFAULT_BORDER_SIZE;
 
-  objPos food;
+  drawBuffer = new char*[boardSizeY];
+  for (int i = 0; i < boardSizeY; i++) {
+    drawBuffer[i] = new char[boardSizeX];
+  }
 
-// TODO Add destructor for heap variables
+  drawnObjList = new DrawnObj*[6];
+  drawnObjCount = 0;
+}
+
+GameMechs::~GameMechs() {
+  for (int i = 0; i < boardSizeY; i++) {
+    delete[] drawBuffer[i];
+  }
+  delete[] drawBuffer;
+  delete[] drawnObjList;
 }
 
 bool GameMechs::getExitFlagStatus() const { return exitFlag; }
@@ -52,3 +70,32 @@ void GameMechs::setExitTrue() { exitFlag = true; }
 void GameMechs::setInput(char this_input) { input = this_input; }
 
 void GameMechs::clearInput() { input = 0; }
+
+void GameMechs::draw() const {
+  for (int i = 0; i < drawnObjCount; i++) {
+    drawnObjList[i]->draw(drawBuffer);
+  }
+
+  // draw border
+  for (int i = 0; i < boardSizeY; i++) {
+    for (int j = 0; j < boardSizeX; j++) {
+      if (i == 0 || i == boardSizeY - borderSize) {
+        drawBuffer[i][j] = '#';
+      } else if (j == 0 || j == boardSizeX - borderSize) {
+        drawBuffer[i][j] = '#';
+      } else {
+        drawBuffer[i][j] = ' ';
+      }
+    }
+  }
+}
+
+void GameMechs::flip() const {
+  // flip buffer onto screen
+  MacUILib_clearScreen();
+  for (int i = 0; i < boardSizeY; i++) {
+    for (int j = 0; j < boardSizeX; j++) {
+      MacUILib_printf("%c", drawBuffer[i][j]);
+    }
+  }
+}

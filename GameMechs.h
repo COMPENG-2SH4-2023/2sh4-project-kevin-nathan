@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <time.h>
 
+#include "DrawnObj.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
 
@@ -25,9 +26,14 @@ private:
   int boardSizeY;
   int borderSize;
 
+  char **drawBuffer;
+  DrawnObj **drawnObjList;
+  int drawnObjCount;
+
 public:
   GameMechs();
   GameMechs(int boardX, int boardY);
+  ~GameMechs();
 
   bool getExitFlagStatus() const;
   void setExitTrue();
@@ -39,6 +45,9 @@ public:
   int getBoardSizeX() const;
   int getBoardSizeY() const;
   int getBorderSize() const;
+
+  void draw() const;
+  void flip() const;
 };
 
 #endif

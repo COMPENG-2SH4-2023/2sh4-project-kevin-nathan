@@ -50,7 +50,10 @@ void GetInput(void) {
 
 void RunLogic() {}
 
-void DrawScreen() { MacUILib_clearScreen(); }
+void DrawScreen() {
+  game.draw();
+  game.flip();
+}
 
 void LoopDelay() {
   MacUILib_Delay(DELAY_CONST); // 0.1s delay
