@@ -5,6 +5,7 @@
 #include <time.h>
 
 #include "DrawnObj.h"
+#include "DrawnObjArray.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
 
@@ -31,8 +32,7 @@ private:
   Player *player;
 
   char **drawBuffer;
-  DrawnObj **drawnObjList;
-  int drawnObjCount;
+  DrawnObjArray *drawnObjArray;
 
 public:
   GameMechs();

@@ -26,8 +26,7 @@ GameMechs::GameMechs() {
     drawBuffer[i] = new char[boardSizeX];
   }
 
-  drawnObjList = new DrawnObj *[6];
-  drawnObjCount = 0;
+  drawnObjArray = new DrawnObjArray();
 }
 
 GameMechs::GameMechs(int boardX, int boardY) {
@@ -45,8 +44,8 @@ GameMechs::GameMechs(int boardX, int boardY) {
     drawBuffer[i] = new char[boardSizeX];
   }
 
-  drawnObjList = new DrawnObj *[6];
-  drawnObjCount = 0;
+  drawnObjArray = new DrawnObjArray();
+  drawnObjArray->add(player);
 }
 
 GameMechs::~GameMechs() {
@@ -54,7 +53,7 @@ GameMechs::~GameMechs() {
     delete[] drawBuffer[i];
   }
   delete[] drawBuffer;
-  delete[] drawnObjList;
+  delete drawnObjArray;
 }
 
 bool GameMechs::getExitFlagStatus() const { return exitFlag; }
@@ -74,8 +73,8 @@ void GameMechs::setInput(char this_input) { input = this_input; }
 void GameMechs::clearInput() { input = 0; }
 
 void GameMechs::draw() const {
-  for (int i = 0; i < drawnObjCount; i++) {
-    drawnObjList[i]->draw(drawBuffer);
+  for (int i = 0; i < drawnObjArray->getSize(); i++) {
+    drawnObjArray->get(i)->draw(drawBuffer);
   }
 
   // draw border

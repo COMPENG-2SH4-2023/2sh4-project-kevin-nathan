@@ -6,8 +6,7 @@
 
 #include "DrawnObj.h"
 
-class Player : DrawnObj {
-  // Construct the remaining declaration from the project manual.
+class Player : public DrawnObj {
 public:
   enum Dir { UP, DOWN, LEFT, RIGHT, STOP }; // This is the direction state
 

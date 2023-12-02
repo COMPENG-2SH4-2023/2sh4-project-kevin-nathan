@@ -4,7 +4,7 @@
 #include "objPos.h"
 #include "DrawnObj.h"
 
-class Food : DrawnObj
+class Food : public DrawnObj
 {
 private:
   objPos pos;

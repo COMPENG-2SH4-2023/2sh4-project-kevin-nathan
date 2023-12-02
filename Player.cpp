@@ -1,11 +1,12 @@
 #include "Player.h"
+#include "GameMechs.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
-#include "GameMechs.h"
 
 Player::Player() {
   myDir = STOP;
   objPosArrayList playerPosList;
+  playerPosList.insertHead(objPos(5, 5, '@'));
 }
 
 Player::~Player() {}
@@ -37,7 +38,8 @@ void Player::updatePlayerDir(char input) {
   }
 }
 
-void Player::movePlayer(int boardSizeX, int boardSizeY, bool deleteTailFlag = true) {
+void Player::movePlayer(int boardSizeX, int boardSizeY,
+                        bool deleteTailFlag = true) {
   objPos snakeHead;
   playerPosList.getHeadElement(snakeHead);
 
@@ -69,13 +71,13 @@ void Player::movePlayer(int boardSizeX, int boardSizeY, bool deleteTailFlag = tr
 
   playerPosList.insertHead(objPos(x, y, symbol));
 
-  if(!deleteTailFlag){
+  if (!deleteTailFlag) {
     playerPosList.removeTail();
   }
 }
 
-void Player::draw(char** buffer){
-  for(int i = 0; i < playerPosList.getSize(); i ++){
+void Player::draw(char **buffer) {
+  for (int i = 0; i < playerPosList.getSize(); i++) {
     objPos returnPos;
     playerPosList.getElement(returnPos, i);
     buffer[returnPos.getY()][returnPos.getX()] = returnPos.getSymbol();
