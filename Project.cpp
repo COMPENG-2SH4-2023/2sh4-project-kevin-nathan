@@ -25,7 +25,7 @@ int main() {
 
   Initialize();
 
-  while (game->getGameState() != GameMechs::RUNNING) {
+  while (game->getGameState() == GameMechs::RUNNING) {
     GetInput();
     RunLogic();
     DrawScreen();
