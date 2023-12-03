@@ -2,8 +2,9 @@
 #define FOOD_H
 
 #include "DrawnObj.h"
-#include "GameMechs.h"
 #include "objPos.h"
+
+class GameMechs;
 
 class Food : public DrawnObj {
 private:

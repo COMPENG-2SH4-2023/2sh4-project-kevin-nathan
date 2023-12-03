@@ -63,18 +63,7 @@ GameMechs::~GameMechs() {
   delete drawnObjArray;
 }
 
-// collection of getters and setters
-GameMechs::GameState GameMechs::getGameState() const { return gameState; }
-char GameMechs::getInput() const { return input; }
-int GameMechs::getBoardSizeX() const { return boardSizeX; }
-int GameMechs::getBoardSizeY() const { return boardSizeY; }
-int GameMechs::getBorderSize() const { return borderSize; }
-void GameMechs::setExitTrue() { gameState = EXIT; }
-void GameMechs::setRunningTrue() { gameState = RUNNING; }
-void GameMechs::setLoseTrue() { gameState = LOSE; }
-void GameMechs::setWinTrue() { gameState = WIN; }
-void GameMechs::setInput(char this_input) { input = this_input; }
-void GameMechs::clearInput() { input = 0; }
+
 
 // main update function
 void GameMechs::update() {
@@ -183,3 +172,16 @@ bool GameMechs::collidesWithFood(int x, int y) {
   }
   return false;
 }
+
+// collection of getters and setters
+GameMechs::GameState GameMechs::getGameState() const { return gameState; }
+char GameMechs::getInput() const { return input; }
+int GameMechs::getBoardSizeX() const { return boardSizeX; }
+int GameMechs::getBoardSizeY() const { return boardSizeY; }
+int GameMechs::getBorderSize() const { return borderSize; }
+void GameMechs::setExitTrue() { gameState = EXIT; }
+void GameMechs::setRunningTrue() { gameState = RUNNING; }
+void GameMechs::setLoseTrue() { gameState = LOSE; }
+void GameMechs::setWinTrue() { gameState = WIN; }
+void GameMechs::setInput(char this_input) { input = this_input; }
+void GameMechs::clearInput() { input = 0; }
