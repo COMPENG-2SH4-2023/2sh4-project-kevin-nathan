@@ -28,7 +28,7 @@ template <typename T> Array<T>::Array() {
 // destructor
 template <typename T> Array<T>::~Array() { delete[] this->data; }
 
-// ensures thta the array has enough capacity to add another item
+// ensures that the array has enough capacity to add another item
 template <typename T> void Array<T>::ensureCapacity() {
   // if the array is full, double the capacity
   if (this->_size == this->capacity) {

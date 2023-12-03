@@ -1,4 +1,5 @@
 #include "Food.h"
+#include "GameMechs.h"
 #include "objPos.h"
 
 // the default constructor calls the other constructor with default values

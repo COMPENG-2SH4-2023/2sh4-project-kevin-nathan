@@ -2,6 +2,7 @@
 #define FOOD_H
 
 #include "DrawnObj.h"
+#include "GameMechs.h"
 #include "objPos.h"
 
 class Food : public DrawnObj {
@@ -15,6 +16,7 @@ public:
   void setXY(int x, int y);
   int getX() const;
   int getY() const;
+  virtual void eaten(GameMechs *game);
 };
 
 #endif

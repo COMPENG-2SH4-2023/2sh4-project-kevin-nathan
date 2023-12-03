@@ -78,7 +78,7 @@ void GameMechs::clearInput() { input = 0; }
 
 // main update function
 void GameMechs::update() {
-  // Update player
+  // Update player direction
   player->updatePlayerDir(input);
 
   // check player collision with food

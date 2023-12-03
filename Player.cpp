@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "GameMechs.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
 
@@ -7,6 +6,7 @@
 Player::Player(int x, int y) {
   myDir = STOP;
   playerPosList = new objPosArrayList();
+  extendAmt = 0;
 
   playerPosList->insertHead(objPos(x, y, '@'));
 }
@@ -78,8 +78,9 @@ void Player::movePlayer(int boardSizeX, int boardSizeY,
 
   playerPosList->insertHead(objPos(x, y, symbol));
 
-  if (deleteTail) {
+  if (extendAmt > 0) {
     playerPosList->removeTail();
+    extendAmt--;
   }
 }
 
@@ -121,3 +122,7 @@ bool Player::checkCollision(int x, int y) {
 
 // gets the length of the player
 int Player::getLength() const { return playerPosList->getSize(); }
+
+void Player::extendBy(int amt){
+  extendAmt += amt;
+}

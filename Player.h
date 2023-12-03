@@ -25,9 +25,12 @@ public:
   int getNextY() const;
   int getLength() const;
 
+  void extendBy(int amt);
+
 private:
   enum Dir myDir;
   objPosArrayList *playerPosList;
+  int extendAmt;
 };
 
 #endif
