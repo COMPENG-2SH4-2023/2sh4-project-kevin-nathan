@@ -5,7 +5,7 @@
 #include <time.h>
 
 #include "DrawnObj.h"
-#include "DrawnObjArray.h"
+#include "Array.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
 #include "Player.h"
@@ -14,34 +14,34 @@
 using namespace std;
 
 class GameMechs {
-  // Construct the remaining declaration from the project manual.
-
-  // Only some sample members are included here
-
-  // You will include more data members and member functions to complete your
-  // design.
-
 public:
+  // enum for game state
   enum GameState {RUNNING, WIN, LOSE, EXIT};
 
 private:
+  // holds the currently buffered input
   char input;
+  // holds the current game state
+  GameState gameState;
 
+  // board configuration
   int boardSizeX;
   int boardSizeY;
   int borderSize;
 
-  GameState gameState;
-
+  // player and food objects
   Player *player;
-  
-  Food *food;
+  Array<Food*> *foodArray;
 
+  // double buffered screen
+  // this gets flipped to the actual screen after everything has been drawn
+  // basically vsync
   char **drawBuffer;
-  DrawnObjArray *drawnObjArray;
+
+  // array of stuff that should be drawn
+  Array<DrawnObj*> *drawnObjArray;
 
 public:
-  GameMechs();
   GameMechs(int boardX, int boardY);
   ~GameMechs();
 
@@ -57,7 +57,10 @@ public:
   int getBorderSize() const;
 
   void update();
+
+  void removeFood(int i);
   void generateFood();
+  bool collidesWithFood(int x, int y);
 
   void setRunningTrue();
   void setLoseTrue();

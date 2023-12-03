@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-#define DELAY_CONST 600000
+#define DELAY_CONST 100000
 #define BOARD_WIDTH 20
 #define BOARD_HEIGHT 10
 
@@ -32,9 +32,9 @@ int main() {
     LoopDelay();
   }
 
-  if(game->getGameState() == GameMechs::LOSE){
+  if (game->getGameState() == GameMechs::LOSE) {
     loseScreen();
-  }else if(game->getGameState() == GameMechs::WIN){
+  } else if (game->getGameState() == GameMechs::WIN) {
     winScreen();
   }
 
@@ -48,7 +48,6 @@ void Initialize() {
   srand(time(NULL));
 
   game = new GameMechs(BOARD_WIDTH, BOARD_HEIGHT);
-  Player player;
 }
 
 void GetInput() {
@@ -58,30 +57,25 @@ void GetInput() {
   }
 
   // convert to uppercase
-  if (input >= 'a' && input <= 'z') { 
+  if (input >= 'a' && input <= 'z') {
     input -= 32;
   }
 
-  if(input == '\e'){
+  if (input == '\e') {
     game->setExitTrue();
   }
 
   game->setInput(input);
 }
 
-void RunLogic() {
-  game->update();
-}
+void RunLogic() { game->update(); }
 
 void DrawScreen() {
   game->draw();
   game->flip();
-  MacUILib_printf("Length: %d");
 }
 
-void LoopDelay() {
-  MacUILib_Delay(DELAY_CONST); // 0.1s delay
-}
+void LoopDelay() { MacUILib_Delay(DELAY_CONST); }
 
 void CleanUp() {
   MacUILib_clearScreen();
@@ -89,22 +83,24 @@ void CleanUp() {
   MacUILib_uninit();
 }
 
-void loseScreen(){
+void loseScreen() {
+  MacUILib_clearScreen();
   MacUILib_printf("YOU LOSE!\n");
   MacUILib_printf("Press ESC to exit");
-  while(true){
-    if(MacUILib_hasChar() && MacUILib_getChar() == '\e'){
+  while (true) {
+    if (MacUILib_hasChar() && MacUILib_getChar() == '\e') {
       break;
     }
     MacUILib_Delay(10);
   }
 }
 
-void winScreen(){
+void winScreen() {
+  MacUILib_clearScreen();
   MacUILib_printf("YOU WIN!\n");
   MacUILib_printf("Press ESC to exit");
-  while(true){
-    if(MacUILib_hasChar() && MacUILib_getChar() == '\e'){
+  while (true) {
+    if (MacUILib_hasChar() && MacUILib_getChar() == '\e') {
       break;
     }
     MacUILib_Delay(10);

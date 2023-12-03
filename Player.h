@@ -8,15 +8,15 @@
 
 class Player : public DrawnObj {
 public:
-  enum Dir { UP, DOWN, LEFT, RIGHT, STOP }; // This is the direction state
+  // enum for player direction
+  enum Dir { UP, DOWN, LEFT, RIGHT, STOP };
 
-  Player();
   Player(int x, int y);
   ~Player();
 
   void updatePlayerDir(char input);
   void movePlayer(int boardSizeX, int boardSizeY, bool deleteTail);
-  void draw(char** buffer) override;
+  void draw(char **buffer) override;
 
   bool checkSelfCollision();
   bool checkCollision(int x, int y);
@@ -24,8 +24,8 @@ public:
   int getNextX() const;
   int getNextY() const;
   int getLength() const;
+
 private:
-  objPos playerPos; // Upgrade this in iteration 3.
   enum Dir myDir;
   objPosArrayList *playerPosList;
 };

@@ -3,13 +3,7 @@
 #include "objPos.h"
 #include "objPosArrayList.h"
 
-Player::Player() {
-  myDir = STOP;
-  playerPosList = new objPosArrayList();
-
-  playerPosList->insertHead(objPos(5, 1, '@'));
-}
-
+// the default constructor calls the other constructor with default values
 Player::Player(int x, int y) {
   myDir = STOP;
   playerPosList = new objPosArrayList();
@@ -17,8 +11,10 @@ Player::Player(int x, int y) {
   playerPosList->insertHead(objPos(x, y, '@'));
 }
 
+// need to free the playerPosList
 Player::~Player() { delete playerPosList; }
 
+// input handler to change the direction of the player
 void Player::updatePlayerDir(char input) {
   switch (input) {
   case 'W':
@@ -46,6 +42,9 @@ void Player::updatePlayerDir(char input) {
   }
 }
 
+// moves the player in the direction it is facing
+// deleteTail dictates whether the tail should be deleted or not
+// useful for extending the player by one segment per frame
 void Player::movePlayer(int boardSizeX, int boardSizeY,
                         bool deleteTail = true) {
   objPos snakeHead;
@@ -84,6 +83,7 @@ void Player::movePlayer(int boardSizeX, int boardSizeY,
   }
 }
 
+// overriden draw function from DrawnObj in order to be able to draw the player
 void Player::draw(char **buffer) {
   for (int i = 0; i < playerPosList->getSize(); i++) {
     objPos returnPos;
@@ -92,6 +92,7 @@ void Player::draw(char **buffer) {
   }
 }
 
+// check if the player has collided with itself
 bool Player::checkSelfCollision() {
   objPos head;
   playerPosList->getElement(head, 0);
@@ -105,6 +106,8 @@ bool Player::checkSelfCollision() {
   return false;
 }
 
+// checks if the player has collided with a given position with any of its
+// segments
 bool Player::checkCollision(int x, int y) {
   objPos segment;
   for (int i = 0; i < playerPosList->getSize(); i++) {
@@ -116,6 +119,5 @@ bool Player::checkCollision(int x, int y) {
   return false;
 }
 
-int Player::getLength()const{
-  return playerPosList->getSize();
-}
+// gets the length of the player
+int Player::getLength() const { return playerPosList->getSize(); }
