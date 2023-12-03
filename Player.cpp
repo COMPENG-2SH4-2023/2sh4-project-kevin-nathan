@@ -2,7 +2,6 @@
 #include "objPos.h"
 #include "objPosArrayList.h"
 
-// the default constructor calls the other constructor with default values
 Player::Player(int x, int y) {
   myDir = STOP;
   playerPosList = new objPosArrayList();
@@ -45,8 +44,7 @@ void Player::updatePlayerDir(char input) {
 // moves the player in the direction it is facing
 // deleteTail dictates whether the tail should be deleted or not
 // useful for extending the player by one segment per frame
-void Player::movePlayer(int boardSizeX, int boardSizeY,
-                        bool deleteTail = true) {
+void Player::movePlayer(int boardSizeX, int boardSizeY) {
   objPos snakeHead;
   playerPosList->getHeadElement(snakeHead);
 
@@ -78,8 +76,9 @@ void Player::movePlayer(int boardSizeX, int boardSizeY,
 
   playerPosList->insertHead(objPos(x, y, symbol));
 
-  if (extendAmt > 0) {
+  if (extendAmt == 0) {
     playerPosList->removeTail();
+  }else{
     extendAmt--;
   }
 }

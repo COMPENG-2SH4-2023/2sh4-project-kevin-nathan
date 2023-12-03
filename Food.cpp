@@ -16,3 +16,8 @@ void Food::setXY(int x, int y) {
 int Food::getX() const { return pos.getX(); }
 
 int Food::getY() const { return pos.getY(); }
+
+void Food::eaten(GameMechs* game){
+  game->getPlayer().extendBy(1);
+  game->increaseScore(50);
+}

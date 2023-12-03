@@ -22,6 +22,8 @@ GameMechs::GameMechs(int boardX, int boardY) {
   boardSizeY = boardY;
   borderSize = DEFAULT_BORDER_SIZE;
 
+  score = 0;
+
   // allocate the player and the food array
   // also puts the player at a random position within the board
   player = new Player(rand() % (boardSizeX - 2 * borderSize) + borderSize,
@@ -63,8 +65,6 @@ GameMechs::~GameMechs() {
   delete drawnObjArray;
 }
 
-
-
 // main update function
 void GameMechs::update() {
   // Update player direction
@@ -72,24 +72,26 @@ void GameMechs::update() {
 
   // check player collision with food
   bool hasCollision = false;
-  for (int i = 0; i < foodArray->size(); i++) {
+
+  int i;
+  for (i = 0; i < foodArray->size(); i++) {
     if (player->checkCollision(foodArray->get(i)->getX(),
                                foodArray->get(i)->getY())) {
-      // we have a collision so remove the food and generate a new one
-      removeFood(i);
-      generateFood();
       hasCollision = true;
       break;
     }
   }
 
-  // if there was no collision, just move the player
-  // otherwise, extend the player and move it
   if (hasCollision) {
-    player->movePlayer(boardSizeX, boardSizeY, false);
-  } else {
-    player->movePlayer(boardSizeX, boardSizeY, true);
+    // call the food objects eaten function
+    foodArray->get(i)->eaten(this);
+
+    // remove and generate new food
+    removeFood(i);
+    generateFood();
   }
+
+  player->movePlayer(boardSizeX, boardSizeY);
 
   // check if the player has collided with itself
   if (player->checkSelfCollision()) {
@@ -130,6 +132,7 @@ void GameMechs::flip() const {
     MacUILib_printf("%s\n", drawBuffer[i]);
   }
   // print the length of the player
+  MacUILib_printf("Score: %d\n", score);
   MacUILib_printf("Length: %d\n", player->getLength());
 }
 
@@ -147,8 +150,8 @@ void GameMechs::removeFood(int index) {
 // generate food until there are MAX_FOOD on the board
 void GameMechs::generateFood() {
   while (foodArray->size() < MAX_FOOD) {
-    // randomly generate x, y coords until it does not generate on a player or
-    // collides with another food
+    // randomly generate x, y coords until it generates somewhere without a
+    // player or food object
     int x, y;
     do {
       x = rand() % (boardSizeX - 2 * borderSize) + borderSize;
@@ -173,15 +176,19 @@ bool GameMechs::collidesWithFood(int x, int y) {
   return false;
 }
 
+void GameMechs::increaseScore(int num) { score += num; }
+void GameMechs::clearInput() { input = 0; }
+
 // collection of getters and setters
 GameMechs::GameState GameMechs::getGameState() const { return gameState; }
 char GameMechs::getInput() const { return input; }
 int GameMechs::getBoardSizeX() const { return boardSizeX; }
 int GameMechs::getBoardSizeY() const { return boardSizeY; }
 int GameMechs::getBorderSize() const { return borderSize; }
+int GameMechs::getScore() const { return score; }
 void GameMechs::setExitTrue() { gameState = EXIT; }
 void GameMechs::setRunningTrue() { gameState = RUNNING; }
 void GameMechs::setLoseTrue() { gameState = LOSE; }
 void GameMechs::setWinTrue() { gameState = WIN; }
 void GameMechs::setInput(char this_input) { input = this_input; }
-void GameMechs::clearInput() { input = 0; }
+Player &GameMechs::getPlayer() { return *player; }

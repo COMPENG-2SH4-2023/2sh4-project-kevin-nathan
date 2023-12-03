@@ -15,7 +15,7 @@ public:
   ~Player();
 
   void updatePlayerDir(char input);
-  void movePlayer(int boardSizeX, int boardSizeY, bool deleteTail);
+  void movePlayer(int boardSizeX, int boardSizeY);
   void draw(char **buffer) override;
 
   bool checkSelfCollision();

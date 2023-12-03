@@ -32,6 +32,7 @@ private:
   // player and food objects
   Player *player;
   Array<Food*> *foodArray;
+  int score;
 
   // double buffered screen
   // this gets flipped to the actual screen after everything has been drawn
@@ -52,9 +53,12 @@ public:
   void setInput(char this_input);
   void clearInput();
 
+
   int getBoardSizeX() const;
   int getBoardSizeY() const;
   int getBorderSize() const;
+  int getScore() const;
+  Player& getPlayer();
 
   void update();
 
@@ -68,6 +72,8 @@ public:
 
   void draw() const;
   void flip() const;
+
+  void increaseScore(int num);
 };
 
 #endif
