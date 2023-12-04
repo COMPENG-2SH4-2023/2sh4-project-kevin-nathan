@@ -11,7 +11,7 @@ protected:
   objPos pos;
 
 public:
-  Food(int x, int y, char symbol);
+  Food(int x, int y, char symbol = 'Q');
   void draw(char **buffer) override;
   void setXY(int x, int y);
   int getX() const;
