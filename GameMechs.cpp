@@ -3,11 +3,11 @@
 #include "Player.h"
 #include "objPos.h"
 
-#include "PortalFood.h"
 #include "ExpandFood.h"
 #include "ExtraPointFood.h"
 #include "Food.h"
 #include "LongFood.h"
+#include "PortalFood.h"
 
 #define DEFAULT_BORDER_SIZE 1
 #define MAX_FOOD 5
@@ -163,9 +163,13 @@ void GameMechs::flip() const {
   MacUILib_printf("\n");
   MacUILib_printf("WASD to move\n");
   MacUILib_printf("q: + 50 score - Normal Food\n");
-  MacUILib_printf("S: + 0 score - Increases length by a random amount between 1-5.\n");
-  MacUILib_printf("@: + 50 x length - Teleports you to a random location. This can teleport you to a square right next to your tail, so be careful!\n");
+  MacUILib_printf(
+      "S: + 0 score - Increases length by a random amount between 1-5.\n");
+  MacUILib_printf(
+      "@: + 50 x length - Teleports you to a random location. This can "
+      "teleport you to a square right next to your tail, so be careful!\n");
   MacUILib_printf("Q: + 0-500 score - Doesn't increase length.\n");
+  MacUILib_printf("E: + 0 score - Increases the size of the playing field by 1.\n");
 }
 
 // remove the food at the given index
@@ -193,22 +197,23 @@ void GameMechs::generateFood() {
     } while (player->checkCollision(x, y) || collidesWithFood(x, y));
 
     int foodRNG = rand() % 100;
-    // decide whether to generate a normal food or a portal food
+    // decide what type of food to generate
     if (foodRNG > 90) {
       foodArray->add(new PortalFood(x, y));
     } else if (foodRNG > 80) {
       foodArray->add(new ExtraPointFood(x, y));
-    } else if (foodRNG > 50){
+    } else if (foodRNG > 60) {
       foodArray->add(new LongFood(x, y));
     } else {
-      foodArray->add(new Food(x, y));
+      int rareRNG = rand() % 1000;
+      if (rareRNG > 990) {
+        foodArray->add(new ExpandFood(x, y));
+      } else {
+        foodArray->add(new Food(x, y));
+      }
     }
 
-    int rareRNG = rand() % 1000;
-    if (rareRNG > 500) {
-      foodArray->add(new ExpandFood(x, y));
-    }
-
+    // add the food to the objects to draw array
     drawnObjArray->add(foodArray->get(foodArray->size() - 1));
   }
 }
