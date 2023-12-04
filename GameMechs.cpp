@@ -1,14 +1,15 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
 #include "Player.h"
-#include "PortalFood.h"
 #include "objPos.h"
-#include <memory>
+// #include <memory>
 
+#include "PortalFood.h"
 #include "ExtraPointFood.h"
 #include "Food.h"
+#include "LongFood.h"
 
-#define DEFAULT_BORDER_SIZE 2
+#define DEFAULT_BORDER_SIZE 1
 #define MAX_FOOD 5
 #define FIELD_CHAR ' '
 #define BORDER_CHAR '#'
@@ -139,6 +140,12 @@ void GameMechs::flip() const {
   // UI elements for score and snake length
   MacUILib_printf("Score: %d\n", score);
   MacUILib_printf("Length: %d\n", player->getLength());
+  MacUILib_printf("\n");
+  MacUILib_printf("WASD to move\n");
+  MacUILib_printf("q: + 50 score - Normal Food\n");
+  MacUILib_printf("S: + 0 score - Increases length by a random amount between 1-5.\n");
+  MacUILib_printf("@: + 50 x length - Teleports you to a random location. This can teleport you to a square right next to your tail, so be careful!\n");
+  MacUILib_printf("Q: + 0-500 score - Doesn't increase length.\n");
 }
 
 // remove the food at the given index
@@ -167,10 +174,12 @@ void GameMechs::generateFood() {
 
     int foodRNG = rand() % 100;
     // decide whether to generate a normal food or a portal food
-    if (foodRNG > 80) {
+    if (foodRNG > 90) {
       foodArray->add(new PortalFood(x, y));
-    } else if (foodRNG > 60) {
+    } else if (foodRNG > 80) {
       foodArray->add(new ExtraPointFood(x, y));
+    } else if (foodRNG > 50){
+      foodArray->add(new LongFood(x, y));
     } else {
       foodArray->add(new Food(x, y));
     }

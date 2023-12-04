@@ -37,7 +37,6 @@ bool objPos::isPosEqual(const objPos *refPos) {
   return (refPos->x == x && refPos->y == y);
 }
 
-// TODO delete if unnecessary, also delete from .h file
 char objPos::getSymbolIfPosEqual(const objPos *refPos) {
   return isPosEqual(refPos) ? getSymbol() : 0;
 }

@@ -7,8 +7,8 @@
 using namespace std;
 
 #define DELAY_CONST 100000
-#define BOARD_WIDTH 20
-#define BOARD_HEIGHT 10
+#define BOARD_WIDTH 30
+#define BOARD_HEIGHT 20
 
 GameMechs *game;
 
