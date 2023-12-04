@@ -212,10 +212,10 @@ void GameMechs::generateFood() {
     } else {
       foodArray->add(new Food(x, y));
     }
+    // add the food to the objects to draw array
+    drawnObjArray->add(foodArray->get(foodArray->size() - 1));
   }
 
-  // add the food to the objects to draw array
-  drawnObjArray->add(foodArray->get(foodArray->size() - 1));
 }
 
 
