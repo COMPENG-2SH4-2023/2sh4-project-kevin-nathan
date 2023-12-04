@@ -6,7 +6,7 @@
 Player::Player(int x, int y) {
   myDir = STOP;
   playerPosList = new objPosArrayList();
-  extendAmt = 0;
+  extendAmt = 2;
 
   playerPosList->insertHead(objPos(x, y, '@'));
 }
