@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Food.h"
-
-class GameMechs;
+#include "GameMechs.h"
 
 // portal food class
 // when eaten, the player will teleport to a random location

@@ -2,9 +2,9 @@
 #include "MacUILib.h"
 #include "Player.h"
 #include "objPos.h"
-// #include <memory>
 
 #include "PortalFood.h"
+#include "ExpandFood.h"
 #include "ExtraPointFood.h"
 #include "Food.h"
 #include "LongFood.h"
@@ -104,6 +104,26 @@ void GameMechs::update() {
   }
 }
 
+// resizes the board to the given parameters
+void GameMechs::resizeBoard(int x, int y) {
+  // free the draw buffer
+  for (int i = 0; i < boardSizeY; i++) {
+    delete[] drawBuffer[i];
+  }
+  delete[] drawBuffer;
+
+  // set the new board size
+  boardSizeX = x;
+  boardSizeY = y;
+
+  // allocate the new draw buffer
+  drawBuffer = new char *[boardSizeY];
+  for (int i = 0; i < boardSizeY; i++) {
+    drawBuffer[i] = new char[boardSizeX + 1];
+    drawBuffer[i][boardSizeX] = '\0';
+  }
+}
+
 // draws everything to the draw buffer but does not flip it
 void GameMechs::draw() const {
   // draw border and clear the draw buffer
@@ -183,6 +203,12 @@ void GameMechs::generateFood() {
     } else {
       foodArray->add(new Food(x, y));
     }
+
+    int rareRNG = rand() % 1000;
+    if (rareRNG > 500) {
+      foodArray->add(new ExpandFood(x, y));
+    }
+
     drawnObjArray->add(foodArray->get(foodArray->size() - 1));
   }
 }

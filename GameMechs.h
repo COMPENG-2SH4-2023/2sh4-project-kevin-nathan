@@ -52,7 +52,6 @@ public:
   void setInput(char this_input);
   void clearInput();
 
-
   int getBoardSizeX() const;
   int getBoardSizeY() const;
   int getBorderSize() const;
@@ -69,6 +68,7 @@ public:
   void setLoseTrue();
   void setWinTrue();
 
+  void resizeBoard(int x, int y);
   void draw() const;
   void flip() const;
 
