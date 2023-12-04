@@ -72,7 +72,7 @@ void GameMechs::update() {
   player->updatePlayerDir(input);
 
   // passes a pointer to the current GameMechs object to the function
-  player->movePlayer(this);
+  player->movePlayer(*this);
 
   // check if the player has collided with any food
   bool hasCollision = false;

@@ -42,7 +42,7 @@ void Player::updatePlayerDir(char input) {
   }
 }
 
-void Player::movePlayer(GameMechs *game) {
+void Player::movePlayer(GameMechs &game) {
   // get data on head of snake
   objPos snakeHead;
   playerPosList->getHeadElement(snakeHead);
@@ -70,9 +70,9 @@ void Player::movePlayer(GameMechs *game) {
   }
 
   // implement wraparound
-  int borderSize = game->getBorderSize();
-  int boardSizeX = game->getBoardSizeX();
-  int boardSizeY = game->getBoardSizeY();
+  int borderSize = game.getBorderSize();
+  int boardSizeX = game.getBoardSizeX();
+  int boardSizeY = game.getBoardSizeY();
   x = (x - borderSize + (boardSizeX - 2 * borderSize)) 
       % (boardSizeX - 2 * borderSize) + borderSize;
   y = (y - borderSize + (boardSizeY - 2 * borderSize)) 
