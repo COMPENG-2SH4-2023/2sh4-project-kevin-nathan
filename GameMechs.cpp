@@ -200,7 +200,8 @@ void GameMechs::generateFood() {
 
     int foodRNG = rand() % 100;
     // decide what type of food to generate
-    if (foodRNG > 90 && expandCount < 5) {
+    if (foodRNG > 90 && expandCount < 10) {
+      //can only expand the board 10 times
       foodArray->add(new ExpandFood(x, y));
       expandCount++;
     } else if (foodRNG > 80) {
