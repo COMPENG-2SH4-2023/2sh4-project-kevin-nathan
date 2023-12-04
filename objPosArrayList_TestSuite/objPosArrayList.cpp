@@ -1,65 +1,52 @@
 #include "objPosArrayList.h"
 
-// Check lecture contents on general purpose array list construction, 
-// and modify it to support objPos array list construction.
-
-objPosArrayList::objPosArrayList()
-{
-  sizeList = 0;
-  sizeArray = ARRAY_MAX_CAP;
-  aList = new objPos[sizeArray];
+//initialize with 0 elements
+objPosArrayList::objPosArrayList() {
+  listSize = 0;
+  arrayCapacity = ARRAY_MAX_CAP;
+  aList = new objPos[arrayCapacity];
 }
 
-objPosArrayList::~objPosArrayList()
-{
-  delete[] aList;
-}
+objPosArrayList::~objPosArrayList() { delete[] aList; }
 
-int objPosArrayList::getSize()
-{
-  return sizeList;
-}
+int objPosArrayList::getSize() { return listSize; }
 
-void objPosArrayList::insertHead(objPos thisPos)
-{
-  for (int i = sizeList; i > 0; i--)
-  {
+void objPosArrayList::insertHead(objPos thisPos) {
+  //shift all elements right
+  for (int i = listSize; i > 0; i--) {
     aList[i] = aList[i - 1];
   }
+
+  //adds new element
   aList[0] = thisPos;
-  sizeList++;
+  listSize++;
 }
 
-void objPosArrayList::insertTail(objPos thisPos)
-{
-  aList[sizeList++] = thisPos;
+void objPosArrayList::insertTail(objPos thisPos) {
+  //adds element to end of list and increase size
+  aList[listSize++] = thisPos;
 }
 
-void objPosArrayList::removeHead()
-{
-  for (int i = 0; i < sizeList; i++)
-  {
+void objPosArrayList::removeHead() {
+  //shift all elements left
+  for (int i = 0; i < listSize; i++) {
     aList[i] = aList[i + 1];
   }
-  sizeList--;
+
+  //"removes" last element by decreasing size
+  listSize--;
 }
 
-void objPosArrayList::removeTail()
-{
-  sizeList--;
-}
+void objPosArrayList::removeTail() { listSize--; }
 
-void objPosArrayList::getHeadElement(objPos &returnPos)
-{
+void objPosArrayList::getHeadElement(objPos &returnPos) {
   returnPos = aList[0];
 }
 
-void objPosArrayList::getTailElement(objPos &returnPos)
-{
-  returnPos = aList[sizeList - 1];
+void objPosArrayList::getTailElement(objPos &returnPos) {
+  returnPos = aList[listSize - 1];
 }
 
-void objPosArrayList::getElement(objPos &returnPos, int index)
-{
+void objPosArrayList::getElement(objPos &returnPos, int index) {
   returnPos = aList[index];
 }
