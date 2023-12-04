@@ -16,7 +16,7 @@ public:
   void setXY(int x, int y);
   int getX() const;
   int getY() const;
-  virtual void eaten(GameMechs *game);
+  virtual void eaten(GameMechs &game);
 };
 
 #endif

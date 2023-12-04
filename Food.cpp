@@ -6,9 +6,9 @@ Food::Food(int x, int y, char symbol) { pos = objPos(x, y, symbol); }
 
 void Food::draw(char **buffer) { buffer[pos.y][pos.x] = pos.symbol; }
 
-void Food::eaten(GameMechs* game){
-  game->getPlayer().extendBy(1);
-  game->increaseScore(50);
+void Food::eaten(GameMechs &game){
+  game.getPlayer().extendBy(1);
+  game.increaseScore(50);
 }
 
 int Food::getX() const { return pos.getX(); }

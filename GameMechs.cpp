@@ -1,6 +1,7 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
 #include "Player.h"
+#include "PortalFood.h"
 #include "objPos.h"
 #include <memory>
 
@@ -85,7 +86,7 @@ void GameMechs::update() {
 
   if (hasCollision) {
     // call the food objects eaten function
-    foodArray->get(i)->eaten(this);
+    foodArray->get(i)->eaten(*this);
 
     // remove and generate new food
     removeFood(i);
@@ -163,8 +164,12 @@ void GameMechs::generateFood() {
       y = rand() % (boardSizeY - 2 * borderSize) + borderSize;
     } while (player->checkCollision(x, y) || collidesWithFood(x, y));
 
-    // add the food to the arrays
-    foodArray->add(new Food(x, y));
+    // decide whether to generate a normal food or a portal food
+    if (rand() % 10 == 0) {
+      foodArray->add(new PortalFood(x, y));
+    } else {
+      foodArray->add(new Food(x, y));
+    }
     drawnObjArray->add(foodArray->get(foodArray->size() - 1));
   }
 }
