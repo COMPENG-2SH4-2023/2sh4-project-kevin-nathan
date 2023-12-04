@@ -165,7 +165,7 @@ void GameMechs::generateFood() {
     } while (player->checkCollision(x, y) || collidesWithFood(x, y));
 
     // decide whether to generate a normal food or a portal food
-    if (rand() % 10 == 0) {
+    if (rand() % 2 == 0) {
       foodArray->add(new PortalFood(x, y));
     } else {
       foodArray->add(new Food(x, y));
