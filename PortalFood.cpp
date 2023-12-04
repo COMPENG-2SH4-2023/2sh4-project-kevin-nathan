@@ -15,4 +15,7 @@ void PortalFood::eaten(GameMechs &game) {
 
   // teleport the player
   game.getPlayer().teleport(x, y);
+
+  // add points to the score equal to the current players length * 50
+  game.increaseScore(game.getPlayer().getLength() * 50);
 }
