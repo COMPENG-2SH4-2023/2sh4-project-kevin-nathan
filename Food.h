@@ -7,7 +7,7 @@
 class GameMechs;
 
 class Food : public DrawnObj {
-private:
+protected:
   objPos pos;
 
 public:
