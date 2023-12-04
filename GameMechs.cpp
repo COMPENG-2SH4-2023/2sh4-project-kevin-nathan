@@ -8,7 +8,7 @@
 #include "ExtraPointFood.h"
 #include "Food.h"
 
-#define DEFAULT_BORDER_SIZE 1
+#define DEFAULT_BORDER_SIZE 2
 #define MAX_FOOD 5
 #define FIELD_CHAR ' '
 #define BORDER_CHAR '#'
@@ -108,10 +108,10 @@ void GameMechs::draw() const {
   // draw border and clear the draw buffer
   for (int i = 0; i < boardSizeY; i++) {
     for (int j = 0; j < boardSizeX; j++) {
-      if (i == 0 || i == boardSizeY - borderSize) {
+      if (i < borderSize || i >= boardSizeY - borderSize) {
         // top and bottom border
         drawBuffer[i][j] = BORDER_CHAR;
-      } else if (j == 0 || j == boardSizeX - borderSize) {
+      } else if (j < borderSize || j >= boardSizeX - borderSize) {
         // left and right border
         drawBuffer[i][j] = BORDER_CHAR;
       } else {
