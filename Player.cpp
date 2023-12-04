@@ -82,6 +82,21 @@ void Player::movePlayer(GameMechs *game) {
   playerPosList->insertHead(objPos(x, y, snakeHead.getSymbol()));
 }
 
+// teleports the player head to the given x, y coords
+void Player::teleport(int x, int y) {
+  // get the head of the snake
+  objPos snakeHead;
+  playerPosList->getHeadElement(snakeHead);
+
+  // set the head to the given coords
+  snakeHead.setX(x);
+  snakeHead.setY(y);
+
+  // remove the old head and insert the new one
+  playerPosList->removeHead();
+  playerPosList->insertHead(snakeHead);
+}
+
 // overriden draw function from DrawnObj in order to be able to draw the player
 void Player::draw(char **buffer) {
   for (int i = 0; i < playerPosList->getSize(); i++) {

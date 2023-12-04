@@ -18,6 +18,8 @@ public:
 
   void updatePlayerDir(char input);
   void movePlayer(GameMechs *game);
+  void teleport(int x, int y);
+
   void draw(char **buffer) override;
 
   bool checkSelfCollision();
