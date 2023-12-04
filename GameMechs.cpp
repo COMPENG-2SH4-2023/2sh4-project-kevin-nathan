@@ -22,6 +22,7 @@ GameMechs::GameMechs(int boardX, int boardY) {
   boardSizeX = boardX;
   boardSizeY = boardY;
   borderSize = DEFAULT_BORDER_SIZE;
+  expandCount = 0;
 
   score = 0;
 
@@ -163,10 +164,14 @@ void GameMechs::flip() const {
   MacUILib_printf("\n");
   MacUILib_printf("WASD to move\n");
   MacUILib_printf("q: + 50 score - Normal Food\n");
-  MacUILib_printf("S: + 0 score - Increases length by a random amount between 1-5.\n");
-  MacUILib_printf("@: + 50 x length - Teleports you to a random location. This can teleport you to a spot right next to your tail, so be careful!\n");
+  MacUILib_printf(
+      "S: + 0 score - Increases length by a random amount between 1-5.\n");
+  MacUILib_printf(
+      "@: + 50 x length - Teleports you to a random location. This can "
+      "teleport you to a spot right next to your tail, so be careful!\n");
   MacUILib_printf("Q: + 0-500 score - Doesn't increase length.\n");
-  MacUILib_printf("E: + 0 score - Increases the size of the playing field by 1.\n");
+  MacUILib_printf(
+      "E: + 0 score - Increases the size of the playing field by 1.\n");
 }
 
 // remove the food at the given index
@@ -195,25 +200,24 @@ void GameMechs::generateFood() {
 
     int foodRNG = rand() % 100;
     // decide what type of food to generate
-    if (foodRNG > 90) {
-      foodArray->add(new PortalFood(x, y));
+    if (foodRNG > 90 && expandCount < 5) {
+      foodArray->add(new ExpandFood(x, y));
+      expandCount++;
     } else if (foodRNG > 80) {
       foodArray->add(new ExtraPointFood(x, y));
-    } else if (foodRNG > 60) {
+    } else if (foodRNG > 70) {
       foodArray->add(new LongFood(x, y));
+    } else if (foodRNG > 60) {
+      foodArray->add(new PortalFood(x, y));
     } else {
-      int rareRNG = rand() % 1000;
-      if (rareRNG > 990) {
-        foodArray->add(new ExpandFood(x, y));
-      } else {
-        foodArray->add(new Food(x, y));
-      }
+      foodArray->add(new Food(x, y));
     }
-
-    // add the food to the objects to draw array
-    drawnObjArray->add(foodArray->get(foodArray->size() - 1));
   }
+
+  // add the food to the objects to draw array
+  drawnObjArray->add(foodArray->get(foodArray->size() - 1));
 }
+
 
 // checks if the given x, y coords have food on them
 bool GameMechs::collidesWithFood(int x, int y) {

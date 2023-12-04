@@ -28,6 +28,7 @@ private:
   int boardSizeX;
   int boardSizeY;
   int borderSize;
+  int expandCount;
 
   // player and food objects
   Player *player;
