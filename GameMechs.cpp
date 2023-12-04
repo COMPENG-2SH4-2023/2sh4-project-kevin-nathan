@@ -12,12 +12,10 @@
 #define BORDER_CHAR '#'
 
 GameMechs::GameMechs(int boardX, int boardY) {
-  // empty input
   input = 0;
-  // currently running
   gameState = RUNNING;
 
-  // read in the board size
+  // construct board according to parameters
   boardSizeX = boardX;
   boardSizeY = boardY;
   borderSize = DEFAULT_BORDER_SIZE;
@@ -30,7 +28,7 @@ GameMechs::GameMechs(int boardX, int boardY) {
                       rand() % (boardSizeY - 2 * borderSize) + borderSize);
   foodArray = new Array<Food *>();
 
-  // allocate the draw buffer
+  // allocate the draw buffer and add string terminators
   drawBuffer = new char *[boardSizeY];
   for (int i = 0; i < boardSizeY; i++) {
     drawBuffer[i] = new char[boardSizeX + 1];
@@ -45,6 +43,7 @@ GameMechs::GameMechs(int boardX, int boardY) {
   generateFood();
 }
 
+// destructor
 GameMechs::~GameMechs() {
   // free the draw buffer
   for (int i = 0; i < boardSizeY; i++) {
@@ -55,22 +54,20 @@ GameMechs::~GameMechs() {
   // free the player
   delete player;
 
-  // free the food
+  // free all the food objects, then the food array
   for (int i = 0; i < foodArray->size(); i++) {
     delete foodArray->get(i);
   }
   delete foodArray;
 
-  // free the objects to draw
+  // free the list of objects to draw
   delete drawnObjArray;
 }
 
 // main update function
 void GameMechs::update() {
-  // Update player direction
   player->updatePlayerDir(input);
 
-  // check player collision with food
   bool hasCollision = false;
 
   int i;
@@ -91,9 +88,10 @@ void GameMechs::update() {
     generateFood();
   }
 
-  player->movePlayer(boardSizeX, boardSizeY);
+  // passes a pointer to the current GameMechs object to the function
+  player->movePlayer(this);
 
-  // check if the player has collided with itself
+  // if player collides with self, lose the game
   if (player->checkSelfCollision()) {
     gameState = LOSE;
   }
@@ -131,7 +129,8 @@ void GameMechs::flip() const {
   for (int i = 0; i < boardSizeY; i++) {
     MacUILib_printf("%s\n", drawBuffer[i]);
   }
-  // print the length of the player
+
+  // UI elements for score and snake length
   MacUILib_printf("Score: %d\n", score);
   MacUILib_printf("Length: %d\n", player->getLength());
 }
@@ -141,9 +140,11 @@ void GameMechs::removeFood(int index) {
   // remove from the objects to draw array
   // this is offset by 1 because the player is always at index 0
   drawnObjArray->remove(index + 1);
-  // delete the food
+
+  // delete the food object
   delete foodArray->get(index);
-  // remove from the food array
+
+  // remove the object from the food array
   foodArray->remove(index);
 }
 
@@ -164,7 +165,7 @@ void GameMechs::generateFood() {
   }
 }
 
-// checks if the given x, y coords collide with any food
+// checks if the given x, y coords have food on them
 bool GameMechs::collidesWithFood(int x, int y) {
   // loop through all food
   for (int i = 0; i < foodArray->size(); i++) {

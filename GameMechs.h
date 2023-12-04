@@ -36,7 +36,6 @@ private:
 
   // double buffered screen
   // this gets flipped to the actual screen after everything has been drawn
-  // basically vsync
   char **drawBuffer;
 
   // array of stuff that should be drawn

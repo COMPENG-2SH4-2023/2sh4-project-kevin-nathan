@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "GameMechs.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
 
@@ -44,14 +45,14 @@ void Player::updatePlayerDir(char input) {
 // moves the player in the direction it is facing
 // deleteTail dictates whether the tail should be deleted or not
 // useful for extending the player by one segment per frame
-void Player::movePlayer(int boardSizeX, int boardSizeY) {
+void Player::movePlayer(GameMechs *game) {
+  // get data on head of snake
   objPos snakeHead;
   playerPosList->getHeadElement(snakeHead);
-
   int x = snakeHead.getX();
   int y = snakeHead.getY();
-  char symbol = snakeHead.getSymbol();
 
+  // moves player coordinates
   switch (myDir) {
   case UP:
     y -= 1;
@@ -71,14 +72,23 @@ void Player::movePlayer(int boardSizeX, int boardSizeY) {
     break;
   }
 
-  x = (x - 1 + (boardSizeX - 2)) % (boardSizeX - 2) + 1;
-  y = (y - 1 + (boardSizeY - 2)) % (boardSizeY - 2) + 1;
+  // implement wraparound
+  int borderSize = game->getBorderSize();
+  int boardSizeX = game->getBoardSizeX();
+  int boardSizeY = game->getBoardSizeY();
+  x = (x - borderSize + (boardSizeX - 2)) % (boardSizeX - 2 * borderSize) +
+      borderSize;
+  y = (y - borderSize + (boardSizeY - 2)) % (boardSizeY - 2 * borderSize) +
+      borderSize;
 
-  playerPosList->insertHead(objPos(x, y, symbol));
+  // insert new element in snake
+  playerPosList->insertHead(objPos(x, y, snakeHead.getSymbol()));
 
-  if (extendAmt == 0) {
+  // keep the snake's tail if extendAmt is more than 0
+  // essentially lengthens the snake if extendAmt > 0
+  if (extendAmt <= 0) {
     playerPosList->removeTail();
-  }else{
+  } else {
     extendAmt--;
   }
 }
@@ -106,8 +116,7 @@ bool Player::checkSelfCollision() {
   return false;
 }
 
-// checks if the player has collided with a given position with any of its
-// segments
+// checks if any of the player's segments has collided with a given xy
 bool Player::checkCollision(int x, int y) {
   objPos segment;
   for (int i = 0; i < playerPosList->getSize(); i++) {
@@ -122,6 +131,5 @@ bool Player::checkCollision(int x, int y) {
 // gets the length of the player
 int Player::getLength() const { return playerPosList->getSize(); }
 
-void Player::extendBy(int amt){
-  extendAmt += amt;
-}
+//increases extendAmy, which increases the snakes length whenever it moves
+void Player::extendBy(int amt) { extendAmt += amt; }

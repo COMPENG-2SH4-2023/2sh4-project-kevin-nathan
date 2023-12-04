@@ -6,6 +6,8 @@
 
 #include "DrawnObj.h"
 
+class GameMechs;
+
 class Player : public DrawnObj {
 public:
   // enum for player direction
@@ -15,7 +17,7 @@ public:
   ~Player();
 
   void updatePlayerDir(char input);
-  void movePlayer(int boardSizeX, int boardSizeY);
+  void movePlayer(GameMechs *game);
   void draw(char **buffer) override;
 
   bool checkSelfCollision();
