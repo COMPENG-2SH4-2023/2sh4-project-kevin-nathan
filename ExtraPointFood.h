@@ -2,8 +2,8 @@
 #include "GameMechs.h"
 
 class ExtraPointFood : public Food {
+public:
   ExtraPointFood(int x, int y);
-  ~ExtraPointFood();
 
-  void eaten(GameMechs *game) override;
+  void eaten(GameMechs &game) override;
 };

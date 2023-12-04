@@ -5,6 +5,7 @@
 #include "objPos.h"
 #include <memory>
 
+#include "ExtraPointFood.h"
 #include "Food.h"
 
 #define DEFAULT_BORDER_SIZE 1
@@ -164,9 +165,12 @@ void GameMechs::generateFood() {
       y = rand() % (boardSizeY - 2 * borderSize) + borderSize;
     } while (player->checkCollision(x, y) || collidesWithFood(x, y));
 
+    int foodRNG = rand() % 100;
     // decide whether to generate a normal food or a portal food
-    if (rand() % 2 == 0) {
+    if (foodRNG > 80) {
       foodArray->add(new PortalFood(x, y));
+    } else if (foodRNG > 60) {
+      foodArray->add(new ExtraPointFood(x, y));
     } else {
       foodArray->add(new Food(x, y));
     }
