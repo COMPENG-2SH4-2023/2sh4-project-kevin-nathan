@@ -42,9 +42,6 @@ void Player::updatePlayerDir(char input) {
   }
 }
 
-// moves the player in the direction it is facing
-// deleteTail dictates whether the tail should be deleted or not
-// useful for extending the player by one segment per frame
 void Player::movePlayer(GameMechs *game) {
   // get data on head of snake
   objPos snakeHead;
@@ -81,7 +78,7 @@ void Player::movePlayer(GameMechs *game) {
   y = (y - borderSize + (boardSizeY - 2)) % (boardSizeY - 2 * borderSize) +
       borderSize;
 
-  // insert new element in snake
+  // insert new element at head
   playerPosList->insertHead(objPos(x, y, snakeHead.getSymbol()));
 
   // keep the snake's tail if extendAmt is more than 0

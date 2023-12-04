@@ -4,33 +4,33 @@
 objPosArrayList::objPosArrayList() {
   listSize = 0;
   arrayCapacity = ARRAY_MAX_CAP;
-  aList = new objPos[arrayCapacity];
+  list = new objPos[arrayCapacity];
 }
 
-objPosArrayList::~objPosArrayList() { delete[] aList; }
+objPosArrayList::~objPosArrayList() { delete[] list; }
 
 int objPosArrayList::getSize() { return listSize; }
 
 void objPosArrayList::insertHead(objPos thisPos) {
   //shift all elements right
   for (int i = listSize; i > 0; i--) {
-    aList[i] = aList[i - 1];
+    list[i] = list[i - 1];
   }
 
   //adds new element
-  aList[0] = thisPos;
+  list[0] = thisPos;
   listSize++;
 }
 
 void objPosArrayList::insertTail(objPos thisPos) {
   //adds element to end of list and increase size
-  aList[listSize++] = thisPos;
+  list[listSize++] = thisPos;
 }
 
 void objPosArrayList::removeHead() {
   //shift all elements left
   for (int i = 0; i < listSize; i++) {
-    aList[i] = aList[i + 1];
+    list[i] = list[i + 1];
   }
 
   //"removes" last element by decreasing size
@@ -40,13 +40,13 @@ void objPosArrayList::removeHead() {
 void objPosArrayList::removeTail() { listSize--; }
 
 void objPosArrayList::getHeadElement(objPos &returnPos) {
-  returnPos = aList[0];
+  returnPos = list[0];
 }
 
 void objPosArrayList::getTailElement(objPos &returnPos) {
-  returnPos = aList[listSize - 1];
+  returnPos = list[listSize - 1];
 }
 
 void objPosArrayList::getElement(objPos &returnPos, int index) {
-  returnPos = aList[index];
+  returnPos = list[index];
 }
