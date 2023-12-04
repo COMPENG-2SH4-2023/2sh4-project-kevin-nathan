@@ -2,7 +2,7 @@
 #include "GameMechs.h"
 #include "objPos.h"
 
-Food::Food(int x, int y) { pos = objPos(x, y, 'Q'); }
+Food::Food(int x, int y, char symbol = 'Q') { pos = objPos(x, y, symbol); }
 
 void Food::draw(char **buffer) { buffer[pos.y][pos.x] = pos.symbol; }
 
