@@ -80,14 +80,6 @@ void Player::movePlayer(GameMechs *game) {
 
   // insert new element at head
   playerPosList->insertHead(objPos(x, y, snakeHead.getSymbol()));
-
-  // keep the snake's tail if extendAmt is more than 0
-  // essentially lengthens the snake if extendAmt > 0
-  if (extendAmt <= 0) {
-    playerPosList->removeTail();
-  } else {
-    extendAmt--;
-  }
 }
 
 // overriden draw function from DrawnObj in order to be able to draw the player
@@ -128,5 +120,21 @@ bool Player::checkCollision(int x, int y) {
 // gets the length of the player
 int Player::getLength() const { return playerPosList->getSize(); }
 
-//increases extendAmy, which increases the snakes length whenever it moves
+// increases extendAmt, which increases the snakes length whenever it moves
 void Player::extendBy(int amt) { extendAmt += amt; }
+
+// checks if the tail needs to be extended and extends it
+void Player::extend() {
+  // don't do anything if the player is not moving
+  if (myDir == STOP) {
+    return;
+  }
+
+  // keep the snake's tail if extendAmt is more than 0
+  // essentially lengthens the snake if extendAmt > 0
+  if (extendAmt <= 0) {
+    playerPosList->removeTail();
+  } else {
+    extendAmt--;
+  }
+}

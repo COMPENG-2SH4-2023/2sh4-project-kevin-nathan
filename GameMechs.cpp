@@ -68,6 +68,10 @@ GameMechs::~GameMechs() {
 void GameMechs::update() {
   player->updatePlayerDir(input);
 
+  // passes a pointer to the current GameMechs object to the function
+  player->movePlayer(this);
+
+  // check if the player has collided with any food
   bool hasCollision = false;
 
   int i;
@@ -88,8 +92,8 @@ void GameMechs::update() {
     generateFood();
   }
 
-  // passes a pointer to the current GameMechs object to the function
-  player->movePlayer(this);
+  // extend the player tail if it needs to
+  player->extend();
 
   // if player collides with self, lose the game
   if (player->checkSelfCollision()) {

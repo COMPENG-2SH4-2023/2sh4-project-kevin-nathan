@@ -28,6 +28,7 @@ public:
   int getLength() const;
 
   void extendBy(int amt);
+  void extend();
 
 private:
   enum Dir myDir;
