@@ -10,6 +10,7 @@
 #include "PortalFood.h"
 
 #define DEFAULT_BORDER_SIZE 1
+#define EXPANSION_LIMIT 10
 #define MAX_FOOD 5
 #define FIELD_CHAR ' '
 #define BORDER_CHAR '#'
@@ -200,7 +201,7 @@ void GameMechs::generateFood() {
 
     int foodRNG = rand() % 100;
     // decide what type of food to generate
-    if (foodRNG > 90 && expandCount < 10) {
+    if (foodRNG > 90 && expandCount < EXPANSION_LIMIT) {
       //can only expand the board 10 times
       foodArray->add(new ExpandFood(x, y));
       expandCount++;
