@@ -33,6 +33,7 @@ private:
   // player and food objects
   Player *player;
   Array<Food*> *foodArray;
+  
   int score;
 
   // double buffered screen
