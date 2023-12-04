@@ -73,10 +73,10 @@ void Player::movePlayer(GameMechs *game) {
   int borderSize = game->getBorderSize();
   int boardSizeX = game->getBoardSizeX();
   int boardSizeY = game->getBoardSizeY();
-  x = (x - borderSize + (boardSizeX - 2)) % (boardSizeX - 2 * borderSize) +
-      borderSize;
-  y = (y - borderSize + (boardSizeY - 2)) % (boardSizeY - 2 * borderSize) +
-      borderSize;
+  x = (x - borderSize + (boardSizeX - 2 * borderSize)) 
+      % (boardSizeX - 2 * borderSize) + borderSize;
+  y = (y - borderSize + (boardSizeY - 2 * borderSize)) 
+      % (boardSizeY - 2 * borderSize) + borderSize;
 
   // insert new element at head
   playerPosList->insertHead(objPos(x, y, snakeHead.getSymbol()));
