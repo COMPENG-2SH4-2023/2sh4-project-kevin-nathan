@@ -163,11 +163,8 @@ void GameMechs::flip() const {
   MacUILib_printf("\n");
   MacUILib_printf("WASD to move\n");
   MacUILib_printf("q: + 50 score - Normal Food\n");
-  MacUILib_printf(
-      "S: + 0 score - Increases length by a random amount between 1-5.\n");
-  MacUILib_printf(
-      "@: + 50 x length - Teleports you to a random location. This can "
-      "teleport you to a square right next to your tail, so be careful!\n");
+  MacUILib_printf("S: + 0 score - Increases length by a random amount between 1-5.\n");
+  MacUILib_printf("@: + 50 x length - Teleports you to a random location. This can teleport you to a spot right next to your tail, so be careful!\n");
   MacUILib_printf("Q: + 0-500 score - Doesn't increase length.\n");
   MacUILib_printf("E: + 0 score - Increases the size of the playing field by 1.\n");
 }
@@ -243,6 +240,5 @@ int GameMechs::getScore() const { return score; }
 void GameMechs::setExitTrue() { gameState = EXIT; }
 void GameMechs::setRunningTrue() { gameState = RUNNING; }
 void GameMechs::setLoseTrue() { gameState = LOSE; }
-void GameMechs::setWinTrue() { gameState = WIN; }
 void GameMechs::setInput(char this_input) { input = this_input; }
 Player &GameMechs::getPlayer() { return *player; }

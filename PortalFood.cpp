@@ -5,7 +5,7 @@ PortalFood::PortalFood(int x, int y) : Food(x, y, '@') {}
 
 void PortalFood::eaten(GameMechs &game) {
   // when eaten by the player, the player teleports to a random location that is
-  // not occupied by the player or food
+  // not occupied by the player or an existing food object
 
   int x, y;
   do {

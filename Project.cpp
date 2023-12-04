@@ -18,7 +18,7 @@ void RunLogic();
 void DrawScreen();
 void LoopDelay();
 void CleanUp();
-void loseScreen();
+void killScreen();
 void winScreen();
 
 int main() {
@@ -33,9 +33,7 @@ int main() {
   }
 
   if (game->getGameState() == GameMechs::LOSE) {
-    loseScreen();
-  } else if (game->getGameState() == GameMechs::WIN) {
-    winScreen();
+    killScreen();
   }
 
   CleanUp();
@@ -83,21 +81,12 @@ void CleanUp() {
   MacUILib_uninit();
 }
 
-void loseScreen() {
+void killScreen() {
   MacUILib_clearScreen();
-  MacUILib_printf("YOU LOSE!\n");
-  MacUILib_printf("Press ESC to exit");
-  while (true) {
-    if (MacUILib_hasChar() && MacUILib_getChar() == '\e') {
-      break;
-    }
-    MacUILib_Delay(10);
-  }
-}
+  MacUILib_printf("YOU DIED!\n");
+  MacUILib_printf("Final Score: %d\n", game->getScore());
+  MacUILib_printf("Final Length: %d\n", game->getPlayer().getLength());
 
-void winScreen() {
-  MacUILib_clearScreen();
-  MacUILib_printf("YOU WIN!\n");
   MacUILib_printf("Press ESC to exit");
   while (true) {
     if (MacUILib_hasChar() && MacUILib_getChar() == '\e') {

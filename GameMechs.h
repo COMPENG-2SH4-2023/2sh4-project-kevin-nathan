@@ -16,7 +16,7 @@ using namespace std;
 class GameMechs {
 public:
   // enum for game state
-  enum GameState {RUNNING, WIN, LOSE, EXIT};
+  enum GameState {RUNNING, LOSE, EXIT};
 
 private:
   // holds the currently buffered input
@@ -66,7 +66,6 @@ public:
 
   void setRunningTrue();
   void setLoseTrue();
-  void setWinTrue();
 
   void resizeBoard(int x, int y);
   void draw() const;
