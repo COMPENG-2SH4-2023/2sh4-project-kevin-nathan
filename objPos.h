@@ -8,7 +8,7 @@ class objPos {
     char symbol;
 
     objPos();
-    objPos(objPos &o);
+    objPos(const objPos &o);
     objPos(int xPos, int yPos, char sym);
 
     void setObjPos(objPos o);

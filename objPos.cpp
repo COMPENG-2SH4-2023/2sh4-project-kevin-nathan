@@ -7,7 +7,7 @@ objPos::objPos() {
 }
 
 // Deep copy constructor
-objPos::objPos(objPos &o) {
+objPos::objPos(const objPos &o) {
   x = o.x;
   y = o.y;
   symbol = o.symbol;
